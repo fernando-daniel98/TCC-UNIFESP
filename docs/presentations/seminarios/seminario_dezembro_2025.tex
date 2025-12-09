@@ -1,0 +1,601 @@
+% ============================================================================
+% Apresentação de Seminário - TCC UNIFESP
+% Sistema de Agricultura de Precisão para Manejo Hídrico Sustentável
+% ============================================================================
+% Autor: Fernando Daniel Marcelino
+% Orientadora: Profa. Dra. Fernanda Quelho Rossi
+% Data: Dezembro de 2025
+% ============================================================================
+
+\documentclass[aspectratio=169]{beamer}
+% Opções: 169 (16:9), 43 (4:3), 1610 (16:10)
+
+% ============================================================================
+% PACOTES
+% ============================================================================
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{positioning, arrows.meta, shapes}
+
+% ============================================================================
+% TEMA E CORES
+% ============================================================================
+\usetheme{Madrid}
+\usecolortheme{default}
+
+% Cores UNIFESP
+\definecolor{unifespblue}{RGB}{0,51,102}
+\definecolor{unifespgreen}{RGB}{0,153,102}
+
+\setbeamercolor{structure}{fg=unifespblue}
+\setbeamercolor{palette primary}{bg=unifespblue,fg=white}
+\setbeamercolor{palette secondary}{bg=unifespgreen,fg=white}
+
+% Remover navegação
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}[frame number]
+
+% ============================================================================
+% INFORMAÇÕES
+% ============================================================================
+\title[Agricultura de Precisão e Manejo Hídrico]{%
+  Sistema de Agricultura de Precisão para o Manejo Sustentável \\
+  de Recursos Hídricos baseado na Fusão de Dados \\
+  de Sensores IoT e Imagens de Satélite
+}
+
+\author[F. D. Marcelino]{%
+  Fernando Daniel Marcelino \\[2mm]
+  {\small Orientadora: Profa. Dra. Fernanda Quelho Rossi}
+}
+
+\institute[UNIFESP]{%
+  Universidade Federal de São Paulo -- UNIFESP \\
+  Instituto de Ciência e Tecnologia \\
+  Bacharelado em Engenharia de Computação \\[3mm]
+  {\small Seminário de Pesquisa -- Dezembro/2025}
+}
+
+\date{8 de Dezembro de 2025}
+
+\titlegraphic{%
+  \includegraphics[width=2.5cm]{figures/logo-unifesp.pdf}
+}
+
+% ============================================================================
+% INÍCIO DO DOCUMENTO
+% ============================================================================
+\begin{document}
+
+% ----------------------------------------------------------------------------
+% SLIDE DE TÍTULO
+% ----------------------------------------------------------------------------
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% ----------------------------------------------------------------------------
+% SUMÁRIO
+% ----------------------------------------------------------------------------
+\begin{frame}{Sumário}
+  \tableofcontents
+\end{frame}
+
+% ============================================================================
+% SEÇÃO 1: INTRODUÇÃO
+% ============================================================================
+\section{Introdução}
+
+\begin{frame}{Contextualização}
+  \begin{itemize}
+    \item \textbf{Cenário global:}
+      \begin{itemize}
+        \item Crescente demanda por alimentos
+        \item Pressão sobre recursos hídricos
+        \item Necessidade de agricultura sustentável
+      \end{itemize}
+    
+    \vspace{0.3cm}
+    
+    \item \textbf{Objetivos de Desenvolvimento Sustentável (ODS):}
+      \begin{itemize}
+        \item \textbf{ODS 2:} Fome Zero e Agricultura Sustentável
+        \item \textbf{ODS 6:} Água Potável e Saneamento
+        \item \textbf{ODS 12:} Consumo e Produção Responsáveis
+      \end{itemize}
+    
+    \vspace{0.3cm}
+    
+    \item \textbf{Desafio:} Como usar a água de forma mais eficiente na agricultura?
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Motivação}
+  \begin{columns}
+    \column{0.5\textwidth}
+    \textbf{Problemas Identificados:}
+    \begin{itemize}
+      \item Escassez de água em diversas regiões
+      \item Desperdício na irrigação tradicional
+      \item Falta de informação em tempo real
+      \item Adoção fragmentada de tecnologias
+      \item Dificuldade de integração de dados
+    \end{itemize}
+    
+    \column{0.5\textwidth}
+    \textbf{Oportunidades Tecnológicas:}
+    \begin{itemize}
+      \item Internet das Coisas (IoT)
+      \item Sensoriamento remoto orbital
+      \item Machine Learning
+      \item Dados abertos (Sentinel, Landsat)
+      \item Agricultura de precisão 4.0
+    \end{itemize}
+  \end{columns}
+  
+  \vspace{0.5cm}
+  
+  \begin{alertblock}{Questão Central}
+    Como integrar dados de sensores em campo com imagens de satélite para otimizar o manejo da irrigação?
+  \end{alertblock}
+\end{frame}
+
+% ============================================================================
+% SEÇÃO 2: DEFINIÇÃO DO PROBLEMA E OBJETIVOS
+% ============================================================================
+\section{Definição do Problema e Objetivos}
+
+\begin{frame}{Definição do Problema}
+  \begin{block}{Problema}
+    A gestão hídrica na agricultura ainda ocorre de forma fragmentada, sem aproveitar plenamente o potencial da integração entre:
+    \begin{itemize}
+      \item Medições de alta frequência temporal (sensores IoT)
+      \item Cobertura espacial ampla (imagens de satélite)
+      \item Técnicas de aprendizado de máquina
+    \end{itemize}
+  \end{block}
+  
+  \vspace{0.3cm}
+  
+  \textbf{Consequências:}
+  \begin{itemize}
+    \item Desperdício de água
+    \item Irrigação inadequada (excesso ou déficit)
+    \item Redução de produtividade
+    \item Impactos ambientais negativos
+    \item Custos operacionais elevados
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Solução Proposta}
+  \begin{center}
+    \begin{tikzpicture}[
+      node distance=1.5cm,
+      box/.style={rectangle, draw, rounded corners, minimum width=3cm, minimum height=1cm, align=center, font=\small},
+      arrow/.style={-Stealth, thick}
+    ]
+      % Nível 1: Fontes
+      \node[box, fill=blue!20] (iot) {Sensores IoT \\ \tiny (Alta freq. temporal)};
+      \node[box, fill=green!20, right=of iot] (sat) {Satélite \\ \tiny (Cobertura espacial)};
+      
+      % Nível 2: Fusão
+      \node[box, below=1.5cm of iot, xshift=2.25cm, fill=yellow!20] (fusion) {Fusão de Dados \\ \tiny (Feature-level)};
+      
+      % Nível 3: ML
+      \node[box, below=1.5cm of fusion, fill=orange!20] (ml) {Machine Learning \\ \tiny (Regressão/Classificação)};
+      
+      % Nível 4: Produto
+      \node[box, below=1.5cm of ml, fill=red!20] (output) {Mapa de Recomendação \\ de Irrigação};
+      
+      % Setas
+      \draw[arrow] (iot) -- (fusion);
+      \draw[arrow] (sat) -- (fusion);
+      \draw[arrow] (fusion) -- (ml);
+      \draw[arrow] (ml) -- (output);
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+\begin{frame}{Objetivos}
+  \begin{block}{Objetivo Geral}
+    Desenvolver um sistema de agricultura de precisão para o manejo hídrico sustentável, baseado na fusão de dados de sensores IoT e imagens de satélite.
+  \end{block}
+  
+  \vspace{0.3cm}
+  
+  \begin{block}{Objetivos Específicos}
+    \begin{enumerate}
+      \item Revisar literatura sobre IoT, sensoriamento remoto e fusão de dados
+      \item Definir arquitetura do sistema (hardware e software)
+      \item Estabelecer metodologia de aquisição e processamento
+      \item Desenvolver modelo de ML para fusão e predição
+      \item Implementar protótipo com dashboard de recomendação
+      \item Analisar eficácia na redução do desperdício de água
+    \end{enumerate}
+  \end{block}
+\end{frame}
+
+% ============================================================================
+% SEÇÃO 3: MÉTODOS
+% ============================================================================
+\section{Métodos}
+
+\begin{frame}{Visão Geral da Metodologia}
+  \begin{enumerate}
+    \item \textbf{Aquisição de Dados}
+      \begin{itemize}
+        \item Caminho A: Datasets existentes
+        \item Caminho B: Coleta em campo (ESP32 + LoRaWAN)
+      \end{itemize}
+    
+    \item \textbf{Pré-processamento}
+      \begin{itemize}
+        \item Correção atmosférica de imagens
+        \item QA/QC de sensores IoT
+        \item Máscaras de nuvem e sombra
+      \end{itemize}
+    
+    \item \textbf{Fusão Espaço-Temporal}
+      \begin{itemize}
+        \item Alinhamento temporal (DOY, hora local)
+        \item Registro espacial (EPSG comum)
+        \item Feature engineering
+      \end{itemize}
+    
+    \item \textbf{Modelagem e Validação}
+      \begin{itemize}
+        \item Random Forest, XGBoost, LightGBM
+        \item Validação cruzada espaço-temporal
+      \end{itemize}
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Fontes de Dados}
+  \begin{columns}
+    \column{0.5\textwidth}
+    \textbf{Sensores IoT:}
+    \begin{itemize}
+      \item Umidade do solo (capacitivo)
+      \item Temperatura e umidade do ar (DHT22)
+      \item Comunicação: LoRaWAN
+      \item Frequência: 15-60 min
+    \end{itemize}
+    
+    \vspace{0.3cm}
+    
+    \textbf{Meteorologia:}
+    \begin{itemize}
+      \item INMET / SIMEPAR
+      \item Temperatura, umidade, precipitação
+    \end{itemize}
+    
+    \column{0.5\textwidth}
+    \textbf{Sensoriamento Remoto:}
+    \begin{itemize}
+      \item \textbf{Sentinel-2:} 10-60m, ~5 dias
+      \item \textbf{Landsat-8/9:} 30m, ~8 dias
+      \item \textbf{Sentinel-1:} SAR, banda C
+    \end{itemize}
+    
+    \vspace{0.3cm}
+    
+    \textbf{Índices Espectrais:}
+    \begin{itemize}
+      \item NDVI (vigor vegetativo)
+      \item NDWI/MNDWI (água)
+      \item NDMI (umidade vegetação)
+    \end{itemize}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Arquitetura do Sistema (Caminho B)}
+  \begin{columns}
+    \column{0.5\textwidth}
+    \textbf{Hardware:}
+    \begin{itemize}
+      \item \textbf{Nó Sensor:}
+        \begin{itemize}
+          \item ESP32 + módulo LoRa
+          \item Sensores de solo e clima
+          \item Bateria + painel solar
+          \item Caixa IP65
+        \end{itemize}
+      
+      \item \textbf{Gateway:}
+        \begin{itemize}
+          \item The Things Network (TTN)
+          \item MQTT/HTTP webhook
+        \end{itemize}
+    \end{itemize}
+    
+    \column{0.5\textwidth}
+    \textbf{Software:}
+    \begin{itemize}
+      \item \textbf{Backend:}
+        \begin{itemize}
+          \item Python (pandas, scikit-learn)
+          \item GDAL/rasterio (geoespacial)
+          \item PostgreSQL/TimescaleDB
+        \end{itemize}
+      
+      \item \textbf{Processamento SR:}
+        \begin{itemize}
+          \item Sen2Cor (correção atmosférica)
+          \item Google Earth Engine
+        \end{itemize}
+      
+      \item \textbf{Frontend:}
+        \begin{itemize}
+          \item Dashboard web (Dash/Streamlit)
+        \end{itemize}
+    \end{itemize}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Pipeline de Fusão de Dados}
+  \begin{enumerate}
+    \item \textbf{Sincronização Temporal}
+      \begin{itemize}
+        \item Ajustar para horário local e DOY (Day of Year)
+        \item Agregações: 15min, 1h, diária
+        \item Interpolação para preencher lacunas
+      \end{itemize}
+    
+    \item \textbf{Alinhamento Espacial}
+      \begin{itemize}
+        \item Reprojetar para CRS comum (EPSG:32722)
+        \item Co-registro entre S1, S2, L8/9
+        \item Extrair valores de pixel para pontos IoT
+      \end{itemize}
+    
+    \item \textbf{Feature Engineering}
+      \begin{itemize}
+        \item Índices espectrais (NDVI, NDWI, NDMI)
+        \item Features de defasagem (t-1, t-2, t-7)
+        \item Agregações espaciais (média 3x3, 5x5)
+        \item Variáveis meteorológicas
+      \end{itemize}
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Modelagem}
+  \begin{columns}
+    \column{0.5\textwidth}
+    \textbf{Modelos Candidatos:}
+    \begin{itemize}
+      \item Random Forest
+      \item XGBoost
+      \item LightGBM
+      \item (Futuro: LSTM para séries temporais)
+    \end{itemize}
+    
+    \vspace{0.3cm}
+    
+    \textbf{Tipo de Problema:}
+    \begin{itemize}
+      \item \textbf{Regressão:} estimar umidade do solo
+      \item \textbf{Classificação:} nível de irrigação
+        \begin{itemize}
+          \item Não irrigar
+          \item Moderada
+          \item Intensa
+        \end{itemize}
+    \end{itemize}
+    
+    \column{0.5\textwidth}
+    \textbf{Validação:}
+    \begin{itemize}
+      \item Train/Val/Test: 60/20/20\%
+      \item K-fold cross-validation (k=5)
+      \item Validação espacial (por talhão)
+      \item Validação temporal (por safra)
+    \end{itemize}
+    
+    \vspace{0.3cm}
+    
+    \textbf{Métricas:}
+    \begin{itemize}
+      \item RMSE, MAE, R²
+      \item Acurácia, Precisão, Recall, F1
+      \item Economia de água estimada (m³)
+    \end{itemize}
+  \end{columns}
+\end{frame}
+
+% ============================================================================
+% SEÇÃO 4: RESULTADOS
+% ============================================================================
+\section{Resultados}
+
+\begin{frame}{Status Atual do Projeto}
+  \begin{table}
+    \centering
+    \begin{tabular}{lc}
+      \toprule
+      \textbf{Atividade} & \textbf{Status} \\
+      \midrule
+      Revisão bibliográfica & \textcolor{green!70!black}{Concluída} \\
+      Definição de arquitetura & \textcolor{green!70!black}{Concluída} \\
+      Organização do repositório & \textcolor{green!70!black}{Concluída} \\
+      Aquisição de dados (A ou B) & \textcolor{orange}{Em decisão} \\
+      Pré-processamento de dados & \textcolor{red}{Não iniciada} \\
+      Fusão de dados & \textcolor{red}{Não iniciada} \\
+      Modelagem & \textcolor{red}{Não iniciada} \\
+      Dashboard & \textcolor{red}{Não iniciada} \\
+      Validação & \textcolor{red}{Não iniciada} \\
+      Escrita da monografia & \textcolor{orange}{Em andamento} \\
+      \bottomrule
+    \end{tabular}
+  \end{table}
+\end{frame}
+
+\begin{frame}{Resultados Esperados}
+  \begin{enumerate}
+    \item \textbf{Metodologia de Fusão}
+      \begin{itemize}
+        \item Pipeline reproduzível e documentado
+        \item Integração efetiva de IoT + Satélite
+      \end{itemize}
+    
+    \item \textbf{Modelo Preditivo}
+      \begin{itemize}
+        \item Estimativa de umidade do solo (R² > 0.8)
+        \item Classificação de necessidade de irrigação (F1 > 0.75)
+      \end{itemize}
+    
+    \item \textbf{Produtos Operacionais}
+      \begin{itemize}
+        \item Mapas de recomendação de irrigação
+        \item Dashboard de apoio à decisão
+        \item Relatórios de economia de água
+      \end{itemize}
+    
+    \item \textbf{Impacto}
+      \begin{itemize}
+        \item Redução estimada de 20-30\% no uso de água
+        \item Melhoria na uniformidade da irrigação
+        \item Contribuição para ODS 2, 6 e 12
+      \end{itemize}
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Exemplo de Produto Final}
+  \begin{center}
+    \includegraphics[width=0.7\textwidth]{figures/example_irrigation_map.png}
+    \\[3mm]
+    {\small Exemplo conceitual de mapa de recomendação de irrigação}
+  \end{center}
+  
+  \begin{itemize}
+    \item \textcolor{blue}{Azul}: Não irrigar (umidade adequada)
+    \item \textcolor{yellow}{Amarelo}: Irrigação moderada
+    \item \textcolor{red}{Vermelho}: Irrigação intensa (déficit hídrico)
+  \end{itemize}
+\end{frame}
+
+% ============================================================================
+% SEÇÃO 5: CONCLUSÕES E TRABALHOS FUTUROS
+% ============================================================================
+\section{Conclusões e Trabalhos Futuros}
+
+\begin{frame}{Conclusões Parciais}
+  \begin{itemize}
+    \item \textbf{Revisão bibliográfica} confirma:
+      \begin{itemize}
+        \item Viabilidade técnica da fusão IoT + Satélite
+        \item Lacuna na integração operacional dessas fontes
+        \item Potencial de ML para agricultura de precisão
+      \end{itemize}
+    
+    \vspace{0.3cm}
+    
+    \item \textbf{Arquitetura proposta} é:
+      \begin{itemize}
+        \item Modular e escalável
+        \item Baseada em tecnologias abertas
+        \item Adaptável a diferentes cenários (Caminhos A e B)
+      \end{itemize}
+    
+    \vspace{0.3cm}
+    
+    \item \textbf{Metodologia} está:
+      \begin{itemize}
+        \item Bem fundamentada teoricamente
+        \item Alinhada com boas práticas de ciência de dados
+        \item Pronta para implementação
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Trabalhos Futuros}
+  \begin{columns}
+    \column{0.5\textwidth}
+    \textbf{Curto Prazo (TCC):}
+    \begin{enumerate}
+      \item Decisão sobre fonte de dados
+      \item Implementação do pipeline
+      \item Treinamento de modelos
+      \item Desenvolvimento do dashboard
+      \item Validação dos resultados
+      \item Finalização da monografia
+    \end{enumerate}
+    
+    \column{0.5\textwidth}
+    \textbf{Longo Prazo:}
+    \begin{enumerate}
+      \item Expansão para outras culturas
+      \item Modelos de previsão (LSTM)
+      \item Integração com sistemas de automação
+      \item App mobile para agricultores
+      \item Análise de custo-benefício
+      \item Estudo de caso em propriedades reais
+      \item Publicação científica
+    \end{enumerate}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Contribuições Esperadas}
+  \begin{block}{Contribuições Técnicas}
+    \begin{itemize}
+      \item Metodologia de fusão IoT-Satélite documentada
+      \item Código e arquitetura open-source
+      \item Pipeline reproduzível de dados
+    \end{itemize}
+  \end{block}
+  
+  \begin{block}{Contribuições Científicas}
+    \begin{itemize}
+      \item Validação de abordagem integradora
+      \item Quantificação de benefícios da fusão
+      \item Base para estudos futuros
+    \end{itemize}
+  \end{block}
+  
+  \begin{block}{Contribuições Socioambientais}
+    \begin{itemize}
+      \item Redução do desperdício de água
+      \item Apoio à agricultura sustentável
+      \item Alinhamento com ODS da ONU
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+% ============================================================================
+% SLIDE FINAL
+% ============================================================================
+\begin{frame}[plain]
+  \begin{center}
+    {\Huge Obrigado!}
+    
+    \vspace{1cm}
+    
+    {\Large Dúvidas e Sugestões?}
+    
+    \vspace{1.5cm}
+    
+    \begin{columns}
+      \column{0.5\textwidth}
+      \begin{center}
+        \textbf{Fernando Daniel Marcelino} \\[2mm]
+        \href{mailto:fernando.marcelino@unifesp.br}{fernando.marcelino@unifesp.br} \\[5mm]
+        \includegraphics[width=0.3\textwidth]{figures/logo-unifesp.pdf}
+      \end{center}
+      
+      \column{0.5\textwidth}
+      \begin{center}
+        \textbf{Repositório do Projeto:} \\[2mm]
+        \href{https://github.com/fernando-daniel98/TCC-UNIFESP}{github.com/fernando-daniel98/TCC-UNIFESP} \\[5mm]
+        {\small Código, dados e documentação disponíveis}
+      \end{center}
+    \end{columns}
+  \end{center}
+\end{frame}
+
+\end{document}

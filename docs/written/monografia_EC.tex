@@ -1,0 +1,1021 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Modelo de TCC do Bacharelado em Engenharia de Computação da UNIFESP (por Profa. Fernanda Rossi)
+% Versão 1.0 (26/novembro/2025)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Baseado no Modelo de Documentos Academicos do ABNTex2  
+
+\documentclass[	12pt, Times, openright, twoside, a4paper, english, brazil]{abntex2}
+
+% ---
+% Pacotes fundamentais 
+% ---
+\usepackage{cmap}				% Mapear caracteres especiais no PDF
+%\usepackage{lmodern}			% Usa a fonte Latin Modern			
+\usepackage{times}
+\usepackage[T1]{fontenc}			% Selecao de codigos de fonte.
+\usepackage[utf8]{inputenc}		% Codificacao do documento (conversão automática dos acentos)
+\usepackage{lastpage}			% Usado pela Ficha catalográfica
+%\usepackage{natbib}
+\usepackage{indentfirst}			% Indenta o primeiro parágrafo de cada seção.
+\usepackage{color}				% Controle das cores
+\usepackage{graphicx}			% Inclusão de gráficos
+% ---
+
+% ---
+% Pacotes de citações
+% ---
+\usepackage[brazilian,hyperpageref]{backref}	 % Paginas com as citações na bibl
+\usepackage[alf]{abntex2cite}	% Citações padrão ABNT
+
+% --- 
+% CONFIGURAÇÕES DE PACOTES
+% --- 
+
+% ---
+% Configurações do pacote backref
+% Usado sem a opção hyperpageref de backref
+\renewcommand{\backrefpagesname}{Citado na(s) página(s):~}
+% Texto padrão antes do número das páginas
+\renewcommand{\backref}{}
+% Define os textos da citação
+\renewcommand*{\backrefalt}[4]{
+	\ifcase #1 %
+		Nenhuma citação no texto.%
+	\or
+		Citado na página #2.%
+	\else
+		Citado #1 vezes nas páginas #2.%
+	\fi}%
+% ---
+
+% numeração de figuras e tabelas 
+\counterwithout{figure}{section}
+\counterwithout{table}{section}
+
+%\renewcommand\tablename{Tabela{\arabic{chapter}.}}
+
+
+% ---
+% Informações de dados para CAPA e FOLHA DE ROSTO
+% ---
+\titulo{Sistema de Agricultura de Precisão para o Manejo Sustentável de Recursos Hídricos baseado na Fusão de Dados de Sensores IoT e Imagens de Satélite}
+\autor{Fernando Daniel Marcelino}
+\local{São José dos Campos, SP}
+\data{Dezembro de 2025}
+\orientador{Profa. Dra. Fernanda Quelho Rossi}
+%\coorientador{Profa. Dra. Nome da Coorientadora}
+\instituicao{%
+  Universidade Federal de São Paulo -- UNIFESP
+  \par
+  Instituto de Ciência de Tecnologia
+  \par
+  Bacharelado em Engenharia de Computação}
+\tipotrabalho{Trabalho de Graduação}
+% O preambulo deve conter o tipo do trabalho, o objetivo, 
+% o nome da instituição e a área de concentração 
+\preambulo{Trabalho de conclusão de curso apresentado ao Instituto de Ciência e Tecnologia – UNIFESP, como parte das atividades para obtenção do título de Bacharel em Engenharia de Computação.}
+% ---
+
+% informações do PDF
+\makeatletter
+\hypersetup{
+     	%pagebackref=true,
+		pdftitle={\@title}, 
+		pdfauthor={\@author},
+    	pdfsubject={\imprimirpreambulo},
+	    pdfcreator={LaTeX with abnTeX2},
+		pdfkeywords={abnt}{latex}{abntex}{abntex2}{trabalho acadêmico}, 
+		colorlinks=true,       		% false: boxed links; true: colored links
+    	linkcolor=blue,          	% color of internal links
+    	citecolor=blue,        		% color of links to bibliography
+    	filecolor=magenta,      		% color of file links
+		urlcolor=blue,
+		bookmarksdepth=4
+}
+
+\makeatother
+% --- 
+% --- 
+% Espaçamentos entre linhas e parágrafos 
+% --- 
+% O tamanho do parágrafo é dado por:
+\setlength{\parindent}{1.25cm}
+% Controle do espaçamento entre um parágrafo e outro:
+\setlength{\parskip}{0.2cm}  % tente também \onelineskip
+% ---
+
+% compila o indice
+% ---
+\makeindex
+% ---
+
+% ----
+% Início do documento
+% ----
+\begin{document}
+% Retira espaço extra obsoleto entre as frases.
+\frenchspacing 
+
+% ----------------------------------------------------------
+% ELEMENTOS PRÉ-TEXTUAIS
+% ----------------------------------------------------------
+% \pretextual
+
+% ---
+% Capa
+% ---
+\begin{capa}
+  \begin{center}
+   \includegraphics[width=.25\textwidth]{logo-unifesp.pdf}
+    \vspace*{\fill}
+    
+    {\ABNTEXchapterfont\large\imprimirautor}
+    \vspace*{\fill}
+    
+    {\ABNTEXchapterfont\bfseries\Large\imprimirtitulo}
+    \vspace*{\fill}\vspace*{\fill}
+    
+   \imprimirlocal
+   \end{center}
+\end{capa}
+
+% ---
+% Folha de rosto
+% (o * indica que haverá a ficha bibliográfica)
+% ---
+\imprimirfolhaderosto*
+% ---
+% ---
+% Inserir folha de aprovação
+% ---
+% Isto é um exemplo de Folha de aprovação, elemento obrigatório da NBR
+% 14724/2011 (seção 4.2.1.3). Você pode utilizar este modelo até a aprovação
+% do trabalho. Após isso, substitua todo o conteúdo deste arquivo por uma
+% imagem da página assinada pela banca com o comando abaixo:
+%
+% \includepdf{folhadeaprovacao_final.pdf}
+%
+% \begin{folhadeaprovacao}
+%   \begin{center}
+%     {\ABNTEXchapterfont\large\imprimirautor}
+
+%     \vspace*{\fill}\vspace*{\fill}
+%     {\ABNTEXchapterfont\bfseries\Large\imprimirtitulo}
+%     \vspace*{\fill}
+    
+%     \hspace{.45\textwidth}
+%     \begin{minipage}{.5\textwidth}
+%         \imprimirpreambulo
+%     \end{minipage}%
+%     \vspace*{\fill}
+%    \end{center}
+    
+%    Trabalho aprovado em 10 de Dezembro de 2025:
+
+%    \assinatura{\textbf{\imprimirorientador} \\ Orientador} 
+%    \assinatura{\textbf{Profa. Dra. Nome da Professora} \\ Convidado 1}
+%    \assinatura{\textbf{Prof. Dr. Nome do Professor} \\ Convidado 2}
+%    %\assinatura{\textbf{Professor} \\ Convidado 3}
+      
+%    \begin{center}
+%     \vspace*{0.5cm}
+%     {\large\imprimirlocal}
+%     \par
+%     {\large\imprimirdata}
+%     \vspace*{1cm}
+%   \end{center}
+  
+% \end{folhadeaprovacao}
+% ---
+
+% ---
+% Dedicatória
+% ---
+\begin{dedicatoria}
+   \vspace*{\fill}
+   \centering
+   \noindent
+   \textit{ Este trabalho é dedicado a ... } \vspace*{\fill}
+\end{dedicatoria}
+% ---
+
+% ---
+% Agradecimentos
+% ---
+\begin{agradecimentos}
+Esta monografia eu dedico à minha família e em especial aos meus pais, Edmilson Aparecido Marcelino e Lucineia Domingues Marcelino, que dedicaram seus esforços para a minha educação. ...
+
+\end{agradecimentos}
+% ---
+
+% ---
+% Epígrafe
+% ---
+\begin{epigrafe}
+    \vspace*{\fill}
+	\begin{flushright}
+		\textit{``A educação é a arma mais poderosa \\
+		que você pode usar para mudar o mundo.'' \\
+		(Nelson Mandela)}
+	\end{flushright}
+\end{epigrafe}
+% ---
+
+% ---
+% RESUMOS
+% ---
+
+% resumo em português
+% \begin{resumo}
+% Consiste na apresentação clara e concisa dos pontos relevantes do trabalho, de maneira a orientar o leitor sobre a conveniência ou não de continuar a leitura do mesmo. Pode ocupar no máximo 1 folha e ter até 500 palavras. Deve ser composto por uma seqüência de frases completas, em um único parágrafo, e não por uma enumeração de tópicos. A primeira frase deverá ser significativa, explicando o tema principal do trabalho. Após o resumo, deve constar palavras-chave relativas aos assuntos da monografia.
+
+% \vspace{\onelineskip}
+% \noindent
+% \textbf{Palavras-chaves}: latex. abntex. estrutura do texto.
+% \end{resumo}
+
+% \begin{resumo}
+% Nas últimas décadas, o aumento da demanda global por alimentos e a intensificação da agricultura têm ampliado a pressão sobre os recursos hídricos, tornando o uso  acional da água um desafio central para a sustentabilidade do setor. Inserido nesse contexto e alinhado aos Objetivos de Desenvolvimento Sustentável (ODS 2, 6 e 12), este trabalho propõe o desenvolvimento de um sistema de agricultura de precisão voltado ao manejo hídrico sustentável, baseado na fusão de dados provenientes de sensores IoT instalados em campo e de imagens de satélite. Inicialmente, são revisados os conceitos de Internet das Coisas (IoT) e sensoriamento remoto aplicados à agricultura 4.0, destacando-se arquiteturas de monitoramento ambiental, redes de sensores de umidade do solo e o uso combinado de sensores orbitais ópticos e de micro-ondas. Em seguida, é apresentada uma metodologia de organização, pré-processamento e integração de dados, contemplando a estruturação de pastas e metadados, rotinas de garantia de qualidade, sincronização temporal entre medições de solo e observações de satélite e estratégias de fusão em nível de atributos. Sobre esse repositório integrado, são delineados modelos básicos de regressão e classificação para estimar variáveis relacionadas ao estado hídrico da cultura e gerar produtos derivados, como mapas temáticos e relatórios de recomendação de irrigação. Por fim, discute-se o planejamento para implementação de um protótipo de \textit{dashboard} de apoio à decisão, visando aproximar produtores e técnicos das informações geradas. O estudo contribui ao sistematizar uma abordagem de referência para projetos que combinem IoT e sensoriamento remoto no contexto da agricultura de precisão sustentável, evidenciando o potencial da fusão de dados para melhorar o manejo da água em lavouras.
+
+% \vspace{\onelineskip}
+% \noindent
+% \textbf{Palavras-chave}: agricultura de precisão; Internet das Coisas; sensoriamento remoto; fusão de dados; manejo hídrico.
+% \end{resumo}
+
+% resumo em português
+\begin{resumo}
+A escassez e a distribuição desigual dos recursos hídricos colocam a agricultura sob forte pressão para produzir mais, com menor desperdício de água e menor impacto ambiental. Diante desse cenário, e em consonância com os Objetivos de Desenvolvimento Sustentável (ODS 2, 6 e 12), esta monografia descreve o projeto de um sistema de agricultura de precisão para o manejo sustentável de recursos hídricos, fundamentado na integração de duas fontes principais de informação: medições de redes de sensores IoT em campo e dados de sensoriamento remoto orbitais. O trabalho aborda, inicialmente, os fundamentos teóricos de Internet das Coisas, sensoriamento remoto e fusão de dados, com ênfase em sensores de umidade do solo, índices espectrais derivados de imagens multiespectrais e produtos de missões espaciais como Sentinel e Landsat. Em seguida, é proposta uma arquitetura em camadas que abrange aquisição, transmissão, armazenamento e tratamento de dados, incluindo rotinas de pré-processamento e sincronização temporal. A partir desse fluxo, são definidos conjuntos de atributos que combinam variáveis de solo, clima e informações espectrais para alimentar modelos de aprendizado de máquina voltados à estimativa de indicadores de estado hídrico e à geração de mapas de recomendação de irrigação em nível de talhão. Complementarmente, delineia-se a implementação de um protótipo de interface visual para apoio à decisão, capaz de apresentar mapas, séries temporais e alertas de forma intuitiva. Como contribuição, o trabalho organiza boas práticas de projeto de dados, documenta uma metodologia de fusão IoT–satélite e oferece uma base estruturada para desenvolvimentos futuros em irrigação inteligente e agricultura de precisão sustentável.
+ 
+\vspace{\onelineskip}
+\noindent
+\textbf{Palavras-chave}: agricultura de precisão; recursos hídricos; irrigação inteligente; Internet das Coisas; sensoriamento remoto.
+\end{resumo}
+
+
+% resumo em inglês
+% \begin{resumo}[Abstract]
+%  \begin{otherlanguage*}{english}
+
+% O abstract deve apresentar a tradução do Resumo em inglês.
+
+
+%    \vspace{\onelineskip}
+ 
+%    \noindent 
+%    \textbf{Key-words}: latex. abntex. text structure.
+%  \end{otherlanguage*}
+% \end{resumo}
+
+\begin{resumo}[Abstract]
+\begin{otherlanguage*}{english}
+Water scarcity and the uneven distribution of water resources place agriculture under strong pressure to increase production while reducing water waste and environmental impacts. In this context, and in accordance with the Sustainable Development Goals (SDGs 2, 6 and 12), this monograph describes the design of a precision agriculture system for sustainable water resources management, grounded in the integration of two main sources of information: measurements from in-field IoT sensor networks and orbital remote sensing data. The work first discusses the theoretical foundations of the Internet of Things, remote sensing and data fusion, with emphasis on soil moisture sensors, spectral indices derived from multispectral imagery and products from space missions such as Sentinel and Landsat. Next, a layered architecture is proposed, covering data acquisition, transmission, storage and processing, including preprocessing routines and temporal synchronization. Based on this flow, feature sets are defined that combine soil, climate and spectral variables to feed machine learning models aimed at estimating indicators of crop water status and generating irrigation recommendation maps at field level. Additionally, the implementation of a visual decision-support prototype is outlined, capable of presenting maps, time series and alerts in an intuitive way. As its main contributions, this work organizes data-project best practices, documents a methodology for IoT–satellite data fusion and provides a structured basis for future developments in smart irrigation and sustainable precision agriculture.
+ 
+\vspace{\onelineskip}
+\noindent 
+\textbf{Key-words}: precision agriculture; water resources; smart irrigation; Internet of Things; remote sensing.
+\end{otherlanguage*}
+\end{resumo}
+
+
+% ---
+% inserir lista de ilustrações
+% ---
+\pdfbookmark[0]{\listfigurename}{lof}
+\listoffigures*
+\cleardoublepage
+% ---
+
+% ---
+% inserir lista de tabelas
+% ---
+\pdfbookmark[0]{\listtablename}{lot}
+\listoftables*
+\cleardoublepage
+% ---
+
+% ---
+% inserir lista de abreviaturas e siglas
+% ---
+\begin{siglas}
+  \item[API] Application Programming Interface (Interface de Programação de Aplicações)
+  \item[IDE] \textit{Integrated Development Environment} (Ambiente de Desenvolvimento Inte-
+grado) 
+  \item[RF] Rádio Frequência
+  \item[ULA] Unidade de Lógica e Aritmética
+
+\end{siglas}
+% ---
+
+% ---
+% inserir lista de símbolos
+% ---
+\begin{simbolos}
+  \item[$ m $] Massa do veículo
+  \item[$ x $] Posição do veículo
+  \item[$ \theta $] Ângulo de ataque do veículo
+  \item[$ \Omega $] Ohm
+\end{simbolos}
+% ---
+
+% ---
+% inserir o sumario
+% ---
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+% ---
+
+% ----------------------------------------------------------
+% ELEMENTOS TEXTUAIS
+% ----------------------------------------------------------
+\textual
+
+% --------------------------------------------------
+% Capítulo da Introdução
+% --------------------------------------------------
+\chapter{Introdução}
+\label{cap_Intro}
+
+Nas últimas décadas, o aumento da demanda global por alimentos e a intensificação da
+agricultura têm elevado a pressão sobre os recursos naturais, especialmente a água. Esse recurso,
+essencial para a manutenção da vida e para a produção agrícola, vem sofrendo escassez em diversas
+regiões, o que tem intensificado a busca por soluções que promovam o uso racional e sustentável da
+água \cite{fao2022sofa}. Essa preocupação está diretamente alinhada aos Objetivos de Desenvolvimento
+Sustentável (ODS) estabelecidos pela Agenda 2030 da Organização das Nações Unidas (ONU), em
+especial os ODS de números 2, 6 e 12, que visam assegurar a segurança alimentar, melhorar o
+manejo hídrico e promover práticas agrícolas sustentáveis. Nesse contexto, a gestão eficaz e
+sustentável da água na agricultura não é apenas uma necessidade técnica, mas uma demanda
+decisiva para garantir a estabilidade ambiental e social \cite{rocha2024exploracao}.
+
+Ao mesmo tempo, o avanço das tecnologias digitais aplicadas à agricultura, como o
+sensoriamento remoto e a Internet das Coisas (IoT), tem possibilitado a coleta massiva de dados
+ambientais e produtivos, abrindo novas oportunidades para o aprimoramento do manejo hídrico e o
+aumento da eficiência no uso da água. Entretanto, observa-se que a adoção dessas tecnologias ainda
+ocorre de forma fragmentada, impedindo uma visão integrada e em tempo quase real da dinâmica
+hídrica nas lavouras. Segundo \citeonline{wang2024integration}, apesar do progresso obtido pela combinação de
+sensores de solo, dados de satélite e técnicas de aprendizado de máquina, persistem desafios
+relacionados à qualidade, à padronização e à interoperabilidade das informações — fatores que
+comprometem a construção de modelos generalizáveis para a agricultura de precisão. Essa falta de
+integração entre diferentes fontes de dados limita a geração de produtos aplicáveis, como mapas de
+irrigação e relatórios de recomendação, que são essenciais para orientar práticas agrícolas mais
+eficientes e ambientalmente responsáveis.
+
+Diante desse cenário, o presente estudo propõe o desenvolvimento de uma metodologia de
+fusão de dados que combine informações provenientes de sensores IoT e de imagens de satélite,
+utilizando técnicas de aprendizado de máquina para gerar recomendações precisas e dinâmicas de
+irrigação. Essa abordagem busca superar as lacunas existentes na integração e automação de dados
+agrícolas, promovendo uma visão mais completa e multiescalar do comportamento hídrico das áreas
+cultivadas. Ao conectar o desafio global da sustentabilidade hídrica às oportunidades
+proporcionadas pela inovação tecnológica, esta pesquisa se apresenta como uma contribuição
+concreta à agricultura de precisão sustentável, fortalecendo o compromisso com o uso racional dos
+recursos naturais e com os objetivos propostos pela Agenda 2030.
+
+% ---
+% Seção Trabalhos Correlatos
+% ---
+\section{Trabalhos Correlatos}
+\label{sec:trabalhos_correlatos}
+
+Após a contextualização apresentada, que evidencia a pressão crescente sobre os recursos
+hídricos e o alinhamento do tema aos Objetivos de Desenvolvimento Sustentável (ODS 2, 6 e
+12), e de toda fundamentação teórica, que definiu os conceitos de Internet das Coisas (IoT) e
+sensoriamento remoto aplicados ao manejo hídrico, esta seção discute trabalhos que
+efetivamente aplicam essas tecnologias em contextos agrícolas.
+
+Os estudos selecionados foram organizados em três eixos: (i) IoT na agricultura, desde revisões
+gerais até aplicações em campo; (ii) sensoriamento remoto e gestão hídrica; e (iii) fusão de
+sensores próximos e remotos. Em conjunto, esses trabalhos ajudam a explicitar a lacuna que
+esta monografia busca abordar: a integração sistemática entre dados de redes de sensores IoT
+e produtos de sensoriamento remoto para apoiar decisões de irrigação em agricultura de
+precisão.
+
+\subsection{IoT na agricultura: de revisões gerais a aplicações em campo}
+
+Em consonância com a discussão sobre o papel da IoT na agricultura 4.0,
+\citeonline{kumar2024smart} apresentam uma revisão extensa sobre o uso de tecnologias de IoT
+na agricultura inteligente e sustentável. Os autores descrevem arquiteturas em camadas
+(sensoriamento, comunicação e aplicação), tipos de sensores (solo, clima, planta), protocolos de
+comunicação (Wi-Fi, LoRa, ZigBee, entre outros) e plataformas em nuvem para armazenamento
+e análise de dados. O survey também destaca aplicações como irrigação inteligente,
+monitoramento de condições ambientais, rastreabilidade e automação de operações agrícolas,
+associando-as a ganhos em eficiência de uso de insumos, produtividade e sustentabilidade. Ao
+mesmo tempo, aponta desafios recorrentes, como limitações de conectividade em áreas rurais,
+interoperabilidade entre dispositivos heterogêneos, segurança, privacidade e modelos de
+negócio para adoção em larga escala \cite{kumar2024smart}.
+
+Focando especificamente sistemas pecuários, mas com pertinência técnica ao contexto agrícola
+em geral, \citeonline{farooq2022survey} realizam um survey sobre o papel da IoT na
+implementação de ambientes de pecuária inteligente. O trabalho discute de forma detalhada a
+infraestrutura de redes IoT, arquiteturas em camadas, topologias e protocolos de
+comunicação, bem como desafios de escalabilidade, consumo energético, robustez da
+comunicação sem fio e padronização. São apresentados casos de uso envolvendo sensores
+vestíveis, coleiras inteligentes e nós distribuídos para monitoramento de saúde, bem-estar e
+produtividade dos animais. Embora o foco seja a produção animal, os pontos críticos
+levantados -- sobretudo no que se refere à confiabilidade da rede e à gestão de grandes
+volumes de dados -- são análogos aos enfrentados por redes de sensores de solo e clima,
+reforçando aspectos sobre os limites e potencialidades da IoT em ambientes rurais
+\cite{farooq2022survey}.
+
+No contexto da agricultura familiar brasileira, \citeonline{gomes2023iot} propõem uma solução
+de baixo custo baseada em IoT para monitoramento agroclimático e suporte à irrigação
+sustentável, aproximando os conceitos discutidos na revisão de \citeonline{kumar2024smart} de
+uma realidade de pequena escala, fundamental para o presente estudo. O sistema integra
+sensores de umidade e temperatura do ar e do solo, sensores de vazão e atuadores de irrigação
+a um software supervisório de código aberto (ScadaBR), com armazenamento dos dados em
+banco MySQL. Implantada em horta experimental no Sul/Sudoeste de Minas Gerais, a solução
+apresenta boa concordância entre os dados coletados e informações meteorológicas oficiais do
+INMET, evidenciando potencial para apoiar decisões de irrigação e reduzir desperdícios de
+água em propriedades com restrições de capital \cite{gomes2023iot}. Este estudo reforça, de
+forma prática, a viabilidade de arquiteturas acessíveis e abertas para o contexto de agricultura
+familiar e para estudo em pequeno porte.
+
+\citeonline{trinta2021gerenciamento} avançam na direção da automatização da irrigação, ao
+apresentar um sistema autônomo de gerenciamento baseado em uma arquitetura com Sistema
+Multiagente (SMA) e IoT. Na solução proposta, um Raspberry Pi executa os agentes
+responsáveis por tomar decisões a partir de dados coletados por microcontroladores, que leem
+sensores de solo e clima e acionam atuadores de irrigação. A comunicação ocorre via
+\textit{middleware} ContextNet, e uma aplicação web permite ao usuário acompanhar o estado do
+cultivo e intervir quando necessário. Os resultados do estudo de caso indicam que a abordagem
+com SMA aumenta a autonomia do sistema, possibilitando decisões de irrigação mesmo na
+ausência de intervenção humana direta e reduzindo a dependência de monitoramento manual
+\cite{trinta2021gerenciamento}. Ao trazer a inteligência para a borda da rede, o trabalho se
+aproxima da proposta desta monografia de utilizar dados de sensores de campo como insumo
+para decisões automatizadas de manejo hídrico, porém ainda sem integrar explicitamente
+informações orbitais.
+
+\subsection{Sensoriamento remoto e gestão hídrica na agricultura}
+
+Do ponto de vista da gestão hídrica em escala de sistema produtivo,
+\citeonline{rocha2024exploracao} realizam uma revisão sobre técnicas de irrigação e
+tecnologias voltadas à minimização do desperdício de água na agricultura, retomando a
+problemática de escassez de recursos. O artigo examina alguns métodos de irrigação (como
+gotejamento, aspersão e sistemas localizados), além de tecnologias de monitoramento que
+incluem desde sensores de solo, estações meteorológicas até ferramentas de apoio às decisões.
+Os autores discutem ganhos em economia de água, energia e fertilizantes, mas ressaltam
+barreiras relacionadas a custos de implantação, necessidade de capacitação técnica e
+desigualdade de acesso entre os produtores. Ao defenderem uma abordagem integrada que
+considere simultaneamente dimensões técnicas, econômicas, sociais e ambientais, reforçam a
+importância de arranjos tecnológicos como o proposto nesta monografia, que articula IoT e
+sensoriamento remoto \cite{rocha2024exploracao}.
+
+\citeonline{muturi2025review} acrescentam a perspectiva do sensoriamento remoto, ao
+revisarem o uso de técnicas orbitais para estimar o uso de água na irrigação. O estudo mapeia
+abordagens baseadas em evapotranspiração, umidade do solo, balanço hídrico e fusão de dados
+de múltiplos sensores, contemplando diferentes escalas espaciais. São discutidos o papel de
+sensores ópticos, térmicos e de micro-ondas, bem como a importância de séries temporais e de
+dados de campo para calibração e validação. Entre as lacunas apontadas estão a subexploração
+de sensores de micro-ondas, a escassez de séries longas e de estudos comparativos, além da
+necessidade de quantificar incertezas quando essas estimativas subsidiam políticas de alocação
+de água \cite{muturi2025review}. Essas observações reforçam a relevância de integrar
+medições locais, como as fornecidas por redes IoT, às estimativas derivadas de imagens de
+satélite.
+
+\citeonline{wang2024integration} ampliam esse panorama ao discutir a integração entre
+sensoriamento remoto e algoritmos de aprendizado de máquina na agricultura de precisão,
+retomando a ênfase no uso de técnicas de inteligência computacional. Os autores sistematizam
+aplicações que combinam imagens de satélite, sensores hiperespectrais, plataformas aéreas não
+tripuladas (UAVs) e sensores de proximidade com modelos como máquinas de vetor de
+suporte, florestas aleatórias e redes neurais profundas. São apresentados exemplos em
+estimativa de produtividade, detecção de estresse hídrico, mapeamento de atributos de solo e
+delimitação de zonas de manejo. Ao mesmo tempo, o estudo enfatiza desafios de qualidade e
+padronização dos dados, interpretabilidade dos modelos e transferência entre regiões com
+diferentes condições edafoclimáticas \cite{wang2024integration}. Esses pontos se alinham
+com as limitações de generalização e importância do contexto local, reforçando a necessidade
+de abordagens de fusão que aproveitem dados orbitais e de campo de forma complementar.
+
+\subsection{Fusão de sensores próximos e remotos no manejo da irrigação}
+
+\citeonline{rodrigues2024digitaltwins} aproximam-se de forma direta da proposta desta
+monografia ao explorar a fusão de dados de sensores proximais e remotos para apoio ao
+zoneamento de manejo de irrigação, articulada ao conceito de ``gêmeos digitais''. Em um pivô
+central de 72 ha no estado de São Paulo, os autores coletam dados de condutividade elétrica
+aparente do solo com sensor proximal EM38-MK2 em alta densidade e, em seguida, simulam
+um cenário de amostragem esparsa com menos linhas de coleta, representando uma situação de
+menor custo operacional. Esses dados são combinados com covariáveis derivadas de modelos
+digitais de elevação e de imagens dos satélites ALOS PALSAR, ASTER, Sentinel-2 e Landsat
+8. Comparando diferentes métodos geoestatísticos e de regressão espacial, o estudo evidencia
+que a krigagem com deriva externa, alimentada pelas covariáveis de sensoriamento remoto,
+permite aproximar a acurácia do mapa de referência obtido com amostragem densa, tornando
+possível definir zonas de manejo de irrigação com menor esforço de campo
+\cite{rodrigues2024digitaltwins}.
+
+Ainda que não utilizem explicitamente redes IoT, os trabalhos de \citeonline{muturi2025review},
+\citeonline{wang2024integration} e \citeonline{rodrigues2024digitaltwins} convergem com a
+Fundamentação Teórica ao demonstrar que o sensoriamento remoto, combinado a medições
+locais, é capaz de gerar produtos espaciais -- como mapas de uso de água, zonas de manejo e
+indicadores de estresse hídrico -- altamente relevantes para decisões de irrigação. O ponto de
+tensão que emerge desses estudos, e que se conecta diretamente à lacuna identificada na
+literatura, é a ausência de arquiteturas bem descritas que integrem de ponta a ponta séries
+temporais de sensores e informações orbitais em fluxos operacionais de apoio à decisão.
+
+\subsection{Síntese crítica e relação com o trabalho proposto}
+
+Os trabalhos analisados confirmam o panorama delineado: soluções baseadas em IoT evoluíram
+significativamente rumo ao monitoramento em tempo quase real e à automação da irrigação em
+nível de propriedade, seja por meio de arquiteturas de baixo custo voltadas à agricultura
+familiar \cite{gomes2023iot}, seja via sistemas com inteligência distribuída, como os baseados
+em sistemas multiagentes \cite{trinta2021gerenciamento}. Em paralelo, a literatura em
+sensoriamento remoto e aprendizado de máquina consolidou métodos para estimar
+evapotranspiração, umidade do solo e uso de água na irrigação, além de delinear zonas de
+manejo com base em dados orbitais e proximais
+\cite{rocha2024exploracao,muturi2025review,wang2024integration,rodrigues2024digitaltwins}.
+
+No entanto, a maior parte desses estudos permanece concentrada em um desses eixos de forma
+isolada: ora enfatizam a infraestrutura de IoT e a lógica de decisão local, ora exploram o
+potencial do sensoriamento remoto e de modelos preditivos, sem detalhar metodologias de
+fusão que conciliem a alta frequência temporal dos sensores de campo com a cobertura espacial
+e multiespectral das imagens de satélite. Assim, embora haja indicações claras do benefício de
+combinar essas fontes de dados -- tanto nas revisões quanto nos estudos aplicados -- ainda são
+relativamente raras as propostas que implementam, validam e documentam arquiteturas
+completas de integração entre IoT e sensoriamento remoto para apoio operacional à gestão
+hídrica em escala de talhão.
+
+Diante desse panorama, reafirma-se o espaço de contribuição desta monografia: desenvolver e
+avaliar um método de fusão de dados entre redes de sensores IoT e produtos de sensoriamento
+remoto, apoiado em técnicas de aprendizado de máquina, voltado à otimização da gestão
+hídrica na agricultura de precisão. Ao articular os elementos discutidos na Introdução, na
+Fundamentação Teórica e nos Trabalhos Correlatos, o estudo busca oferecer uma abordagem
+integrada que contribua para o uso mais eficiente e sustentável da água, em apoio às diretrizes
+dos ODS e aos desafios práticos enfrentados em sistemas agrícolas reais.
+
+% ---
+% Seção Definição do Problema
+% ---
+\section{Definição do Problema}
+
+Descrever o problema que será resolvido e as justificativas.
+
+% ---
+% Seção Objetivos
+% ---
+\section{Objetivos}
+
+\subsection{Objetivo Geral}
+
+O objetivo geral deste trabalho é propor e desenvolver um sistema de agricultura de precisão
+focado no manejo hídrico sustentável, baseado na fusão de dados de sensores IoT e imagens
+de satélite, com o propósito de gerar mapas de recomendação de irrigação mais precisos e
+eficientes.
+
+\subsection{Objetivos Específicos}
+
+Para atingir o objetivo geral proposto, estabelecem-se os seguintes objetivos específicos:
+
+\begin{itemize}
+    \item Revisar a literatura e o estado da arte sobre as tecnologias de IoT, sensoriamento remoto
+    e técnicas de fusão de dados aplicadas à agricultura de precisão;
+
+    \item Definir a arquitetura do sistema, especificando os componentes de hardware para a
+    coleta de dados e a plataforma de software para ingestão e armazenamento dos dados;
+
+    \item Definir e estabelecer a metodologia para a aquisição e o processamento de imagens de
+    satélite para a área de estudo;
+
+    \item Desenvolver um modelo de \textit{machine learning} para realizar a fusão dos dados,
+    correlacionando as medições pontuais e de alta frequência dos sensores IoT com os dados
+    espaciais de baixa frequência das imagens de satélite;
+
+    \item Implementar um protótipo do sistema que utilize o modelo de fusão para gerar mapas,
+    relatórios ou \textit{dashboards} de recomendação e alerta sobre a irrigação, indicando a
+    variabilidade da necessidade de irrigamento;
+
+    \item Analisar a eficácia potencial do sistema proposto na redução do desperdício de água e
+    no aumento da eficiência produtiva, validando a metodologia adotada.
+\end{itemize}
+
+% ---
+% Seção Estrutura do Texto
+% ---
+\section{Estrutura do Texto}
+
+Os próximos capítulos deste trabalho são organizados da seguinte forma: 
+\begin{itemize}
+\item Capítulo \ref{cap_fundTeo} apresenta ...
+\item Capítulo \ref{cap_desenv} descreve ...
+\item Capítulo \ref{cap_results} mostra ...
+\item Capítulo \ref{cap_conclusao} relata ...
+\end{itemize}
+
+  
+% ---
+% Capitulo de revisão de literatura
+% ---
+%\chapter{Revisão Bibliográfica}
+
+
+% ---
+% Capitulo de Fundamentação Teórica
+% ---
+\chapter{Fundamentação Teórica}
+\label{cap_fundTeo}
+
+\section{Internet das Coisas (IoT)}
+
+O termo Internet das Coisas (IoT) é utilizado para tratar da comunicação entre máquinas
+e dispositivos conectados à internet, envolvendo diversas tecnologias para transporte
+e gerenciamento de dados \cite{maschietto2021arquitetura}. Historicamente, a literatura
+registra o experimento de John Romkey, em 1990, que conectou uma torradeira à
+internet para ser acionada remotamente, frequentemente apresentado como um marco
+inaugural da IoT \cite{mancini2017internet}.
+
+No contexto do manejo hídrico na agricultura, a IoT integra sensores de umidade do
+solo, temperatura, vazão, pressão e outros a plataformas de telemetria e análise,
+viabilizando observações de alta frequência diretamente no campo e alimentando
+sistemas de apoio à decisão sobre quando e quanto irrigar, com potencial de reduzir
+desperdícios de água e custos operacionais
+\cite{kumar2024smart,rejeb2022interplay}.
+
+Quanto às comunicações, a escolha do enlace depende de critérios como alcance,
+consumo de energia e infraestrutura disponível. Tecnologias como Wi-Fi e ZigBee
+são adequadas em áreas com rede local estruturada; já as \textit{Low-Power Wide-Area
+Networks} (LPWAN), como LoRaWAN e NB-IoT, oferecem baixo consumo e ampla
+cobertura, sendo recorrentes em aplicações de monitoramento de irrigação e outros
+ambientes produtivos. A literatura também registra o uso de \textit{data loggers} de baixo
+custo baseados em LoRaWAN em cenários agrícolas
+\cite{farooq2021iotagriculture,farooq2022survey}.
+
+Do ponto de vista organizacional e de gestão de dados, interoperabilidade,
+padronização de metadados e garantia de qualidade são aspectos cruciais para integrar
+medições provenientes de redes IoT com outras fontes de informação, como dados
+meteorológicos e imagens de satélite, de modo a sustentar modelos de recomendação
+generalizáveis \cite{kumar2024smart,rejeb2022interplay}. Além disso, revisões recentes
+enfatizam a importância de questões de segurança e privacidade, da gestão do ciclo de
+vida dos dispositivos e da validação em escala como frentes prioritárias de pesquisa e
+desenvolvimento \cite{rejeb2022interplay,hussein2024harvesting}.
+
+Por fim, a literatura aplicada indica a viabilidade de soluções de baixo custo para
+adoção em pequenas propriedades rurais: arquiteturas baseadas em sensores básicos
+acoplados a atuadores, operando sobre redes de baixo consumo, têm sido reportadas
+com ganhos potenciais de eficiência no uso da água e lições práticas de
+implementação e validação em campo
+\cite{kumar2024smart,farooq2021iotagriculture}.
+
+\section{Sensoriamento remoto aplicado ao manejo hídrico}
+
+O sensoriamento remoto (SR) oferece medições multiescalares --- espacial, temporal
+e espectral --- essenciais ao manejo hídrico em agricultura de precisão, permitindo
+inferir vigor vegetativo, umidade e evapotranspiração, além do mapeamento de água
+superficial. A literatura recente aponta para o amadurecimento desse campo, com
+crescimento das aplicações e consolidação de revisões e mapeamentos sistemáticos
+\cite{garciaberna2020systematic}.
+
+\subsection{Plataformas, sensores e resoluções relevantes}
+
+No domínio óptico multiespectral, o Sentinel-2/MSI disponibiliza 13 bandas (quatro
+a 10~m, seis a 20~m e três a 60~m) e revisita nominal de aproximadamente 5 dias
+em constelação, sendo amplamente empregado na derivação de índices espectrais e
+séries temporais. Os satélites Landsat-8/9 (OLI/TIRS) oferecem resolução espacial de
+30~m nas bandas multiespectrais (15~m na banda pancromática) e bandas térmicas de
+100~m (reamostradas para 30~m), com revisita combinada de cerca de 8 dias, sendo
+úteis a análises de água em escala de talhão até bacia hidrográfica.
+
+A combinação Harmonized Landsat and Sentinel-2 (HLS) unifica a refletância de
+superfície de OLI e MSI, elevando a densidade temporal e a consistência radiométrica
+para análises multissensor \cite{claverie2018hls}. No domínio de micro-ondas (SAR),
+o Sentinel-1 (banda C) permite observações diurnas e noturnas, com menor
+sensibilidade à presença de nuvens, sendo central para a estimativa de umidade do
+solo e para a continuidade do monitoramento em condições meteorológicas adversas.
+Estudos recentes exploram abordagens físicas e híbridas, incluindo decomposição
+polarimétrica e aplicações de aprendizado de máquina \cite{roy2025rootzone}.
+
+\subsection{Pré-processamento e qualidade dos dados}
+
+Para dados ópticos multiespectrais, boas práticas incluem correção atmosférica
+(por exemplo, com o Sen2Cor para geração de produtos de refletância de
+superfície), mascaramento de nuvens e sombras e co-registro entre cenas e sensores.
+A documentação técnica (\textit{ATBD}/Sen2Cor, \textit{Scene User Manual}) orienta a
+configuração de parâmetros e explicita limitações dos produtos.
+
+Em fusões envolvendo Sentinel-1, Sentinel-2 e Landsat, recomenda-se a
+harmonização radiométrica e geométrica, bem como a reprojeção para o sistema de
+referência cartográfica do projeto (por exemplo, EPSG:32722), assegurando
+consistência espacial para a comparação com métricas de campo e para a geração
+de produtos integrados. Ademais, a inserção e padronização de metadados
+(sensor, data, ano/dia juliano, horário local, sistema de referência, entre outros)
+são fundamentais para ampliar a utilidade das cenas em fluxos que envolvam
+aplicações de inteligência artificial e outras metodologias avançadas.
+
+\subsection{Índices e produtos para água, vegetação e umidade}
+
+Índices espectrais são amplamente utilizados em aplicações de agricultura de
+precisão. Para água superficial, destaca-se o índice clássico NDWI (GREEN--NIR),
+que realça lâminas d'água e suprime o fundo terrestre; em áreas urbanas ou com
+mistura espectral mais complexa, o MNDWI (que substitui o NIR por SWIR) reduz a
+contaminação por alvos construídos e solo exposto.
+
+Para vegetação, índices como NDVI e EVI são empregados no monitoramento do
+vigor vegetativo. Já para umidade da vegetação e do solo, índices que utilizam bandas
+no SWIR (como NDMI e variações do NDWI proposto por Gao) e composições
+combinando Sentinel-1 e Sentinel-2 ajudam a inferir estresse hídrico, sobretudo
+quando acoplados a séries temporais térmicas para estimativa de
+evapotranspiração em algoritmos de balanço de energia, como SEBAL e METRIC
+\cite{bastiaanssen1998sebal}.
+
+\subsection{Diretrizes para fusão de sensoriamento remoto e IoT no manejo hídrico}
+
+Com base na literatura de sensoriamento remoto e IoT, destacam-se algumas
+diretrizes gerais para a fusão de dados orbitais e de redes de sensores no contexto
+do manejo hídrico:
+
+\begin{enumerate}
+    \item \textbf{Alinhamento espaço-temporal}: compatibilizar a revisita dos satélites
+    (por exemplo, Sentinel-2 com revisita de aproximadamente 5 dias e
+    Landsat-8/9 com cerca de 8 dias) com a frequência das medições dos
+    sensores IoT, mitigando lacunas por meio de composições HLS ou da
+    assimilação de dados SAR (como Sentinel-1) em períodos com elevada
+    cobertura de nuvens \cite{claverie2018hls}.
+
+    \item \textbf{Níveis de fusão}: considerar diferentes níveis de integração, desde a fusão
+    em nível de sensor (\textit{sensor-level}, com reamostragem e registro espacial),
+    passando pela fusão em nível de atributos (\textit{feature-level}, combinando
+    índices e estatísticas derivadas de Sentinel-2/Landsat com métricas
+    provenientes de sensores IoT), até a fusão em nível de decisão
+    (\textit{decision-level}, com combinação de saídas de múltiplos modelos).
+    Recomenda-se a adoção de estratégias de validação cruzada espaço-temporal
+    para avaliar a robustez dos modelos \cite{garciaberna2020systematic}.
+
+    \item \textbf{Qualidade e rastreabilidade}: aplicar rotinas rigorosas de controle de
+    qualidade (máscaras de nuvem e sombra, verificação geométrica, detecção de
+    \textit{outliers}), padronizar metadados (sensor, data, horário local, sistema de
+    referência, entre outros) e manter trilhas de auditoria que garantam a
+    reprodutibilidade das análises.
+
+    \item \textbf{Indicadores operacionais}: derivar camadas temáticas de interesse para o
+    manejo hídrico, como mapas de água (NDWI/MNDWI), umidade e estresse
+    hídrico (NDMI, composições Sentinel-1--Sentinel-2) e estimativas de
+    evapotranspiração (SEBAL/METRIC), integrando-as a informações de solo,
+    meteorologia e redes de sensores IoT para gerar mapas de recomendação de
+    irrigação, painéis de monitoramento e alertas operacionais.
+\end{enumerate}
+
+
+
+% ---
+% Capitulo de Desenvolvimento
+% ---
+\chapter{Desenvolvimento}
+\label{sec:desenvolvimento}
+
+Esta seção descreve os materiais e os métodos a serem empregados no estudo, considerando dois caminhos complementares de obtenção de dados: (A) uso de \textit{datasets} existentes e (B) coleta em campo com rede própria baseada em LoRaWAN. Ao final, apresenta-se o cronograma das atividades planejadas.
+
+% -------------------------
+% MATERIAIS
+% -------------------------
+\section{Materiais}
+\label{subsec:materiais}
+Pensando nos materiais utilizados para o desenvolvimento, devido à incerteza na extração dos dados utilizados para o estudo, pensou-se em utilizar duas temáticas: dados e \emph{hardware}.
+
+\subsection{Dados}
+\label{subsubsec:dados}
+A utilização dos dados nesse estudo é fundamental. Ter um bom conjunto de dados para fazer a sua separação para treinar e testar o modelo desenvolvido, terá relação direta no impacto deste projeto. No entanto, devido ao impedimento de ir a campo para coletar as amostras, pensou-se em dois caminhos.
+
+\noindent\textbf{Caminho A — \emph{Dataset} existente}
+\begin{itemize}
+    \item Séries históricas e/ou \textit{datasets} acadêmicos contendo variáveis de solo/umidade e apoio meteorológico;
+    \item Meteorologia (INMET/SIMEPAR ou estação local);
+    \item Sensoriamento remoto: Sentinel-2 (MSI), Landsat-8/9 (OLI/TIRS) e Sentinel-1 (SAR);
+    \item Dados vetoriais: limites de talhão, rede de drenagem, solos e corpos d’água.
+\end{itemize}
+
+\noindent\textbf{Caminho B — Coleta em campo (rede própria)}
+\begin{itemize}
+    \item Amostra piloto em 1--2 talhões, com medições de umidade do solo e temperatura/umidade do ar;
+    \item Registros de validação manual (checklist de campo; amostras pontuais).
+\end{itemize}
+
+
+
+\subsection{\emph{Hardware} e comunicação (Caminho B)}
+\label{subsubsec:hardware}
+
+\begin{itemize}
+    \item Microcontrolador \textbf{ESP32} com suporte a \textbf{LoRa};
+    \item \textbf{\emph{Gateway} LoRaWAN} (TTN/ChirpStack) ou concentrador disponível;
+    \item Sensores: umidade do solo (capacitivo/tensiométrico), temperatur e umidade relativa do ar;
+    \item Antenas, caixa com proteção de entrada, cabeamento, fonte/bateria.
+\end{itemize}
+
+\subsection{\emph{Software} e serviços}
+\label{subsubsec:software}
+
+\begin{itemize}
+    \item Ambiente Python (venv/conda); bibliotecas: GDAL/rasterio, SNAP/Sen2Cor, ou ainda Google Earth Engine;
+    \item Telemetria (Caminho B): The Things Stack/TTN, MQTT/HTTP, \emph{scripts} de ingestão;
+    \item Ciência de dados e visualização: \texttt{numpy}, \texttt{pandas}, \texttt{scikit-learn}, QGIS, \texttt{dash} ou \texttt{streamlit}.
+\end{itemize}
+
+\subsection{Organização e gestão de dados}
+\label{subsubsec:organizacao}
+
+\begin{itemize}
+    \item Estrutura de pastas: \texttt{raw/}, \texttt{interim/}, \texttt{processed/}, \texttt{models/}, \texttt{reports/};
+    \item Metadados (CSV/Parquet): \textit{sensor}, \textit{lat}, \textit{lon}, data/hora local, DOY, \texttt{QA flags}, \texttt{CRS};
+    \item Controle de versão: Git/GitHub e possivelmente \emph{Data Version Control} (DVC) para grandes volumes de dados.
+\end{itemize}
+
+
+% -------------------------
+% MÉTODOS
+% -------------------------
+\section{Métodos}
+\label{subsec:metodos}
+
+\subsection{\emph{Gate} de decisão (Mês 1--2)}
+\label{subsubsec:gate}
+
+\begin{enumerate}
+    \item Verificar disponibilidade e suficiência de \textit{datasets} existentes (variáveis, período, frequência);
+    \item Se suficiente: adotar \textbf{Caminho A} para acelerar a modelagem; caso contrário, ativar \textbf{Caminho B} para coleta em campo com LoRaWAN.
+\end{enumerate}
+
+\subsection{Delineamento experimental}
+\label{subsubsec:delineamento}
+
+\begin{itemize}
+    \item Área de estudo (município/UTM/bioma) e talhões;
+    \item Período de análise (safra/estação);
+    \item Variáveis mínimas: umidade do solo, T/UR do ar;
+    \item Unidades de análise: pixel (10--30~m), ponto de sensor e talhão.
+\end{itemize}
+
+\subsection{Aquisição de dados}
+\label{subsubsec:aquisicao}
+
+\noindent\textbf{Caminho A — Dataset existente}
+\begin{itemize}
+    \item Curadoria: fonte, licença, cobertura temporal/espacial, variáveis e qualidade;
+    \item Harmonização: fuso/horário local, DOY e unidades;
+    \item Integração de meteorologia e vetoriais do talhão.
+\end{itemize}
+
+\noindent\textbf{Caminho B — Coleta em campo (ESP32 + LoRaWAN)}
+\begin{itemize}
+    \item Topologia: nós ESP+LoRa $\rightarrow$ gateway LoRaWAN $\rightarrow$ servidor (TTN/ChirpStack);
+    \item \textit{Payload}: \texttt{id\_no}, \texttt{timestamp} local, umidade\_solo, T/UR, (opcional) pressão/vazão, bateria;
+    \item Amostragem: leitura a cada 5~min; agregações a cada 15--60~min para modelagem;
+    \item Calibração: teste de bancada e checagens periódicas (curva de umidade; sensores de referência);
+    \item Ingestão: \textit{uplink} $\rightarrow$ webhook/MQTT $\rightarrow$ banco ou CSV (com logs de perda/retransmissão).
+\end{itemize}
+
+\subsection{Sensoriamento remoto (comum aos caminhos A e B)}
+\label{subsubsec:sr}
+
+\begin{itemize}
+    \item Critérios: nuvem $< X\%$, coleção L2A (S2)/C2 (L8/9), janelas de revisita;
+    \item Óptico: correção atmosférica (Sen2Cor), máscara nuvem/sombra, recorte ao talhão;
+    \item SAR: calibração radiométrica, correção de terreno, co-registro S1$\leftrightarrow$S2;
+    \item Derivação: NDWI/MNDWI (água), NDVI/NDMI (vigor/umidade) e, quando aplicável, LST/ET;
+    \item Harmonização: HLS para densificar séries; reprojeção para \texttt{EPSG} do projeto.
+\end{itemize}
+
+\subsection{Fusão espaço-temporal}
+\label{subsubsec:fusao}
+
+\begin{itemize}
+    \item Alinhamento temporal/espacial: grade comum (10--30~m), DOY/hora local; \textit{gap-filling} via composições/HLS;
+    \item Níveis de fusão:
+        \begin{itemize}
+            \item \textit{Sensor-level}: reamostragem/registro S1--S2--L8/9 $\leftrightarrow$ pontos/talhões;
+            \item \textit{Feature-level}: \textit{feature set} com índices SR + agregados IoT + clima (defasagens/janelas);
+        \end{itemize}
+    \item QA/QC integrado: \texttt{QA} de nuvem/sombra, \emph{outliers} IoT, sincronização de relógio, auditoria de processamento.
+\end{itemize}
+
+\subsection{Modelagem e produtos}
+\label{subsubsec:modelagem}
+
+\begin{itemize}
+    \item \textit{Baselines}: regressão (umidade/ET) e classificação (água/estresse);
+    \item Pós-processamento: suavização temporal, morfologia espacial, máscaras operacionais;
+    \item Produtos: GeoTIFF/COG por período, camadas temáticas e \emph{mapa de recomendação de irrigação}.
+\end{itemize}
+
+\subsection{Validação}
+\label{subsubsec:validacao}
+
+\begin{itemize}
+    \item Esquema espaço-temporal: treino/validação/teste por talhão/tempo;
+    \item Métricas: RMSE/MAE (contínuo), F1/IoU (segmentação água/estresse) e \textit{gain} operacional (economia de água);
+    \item Validação de campo (se Caminho B): pontos independentes + registros operacionais de irrigação.
+\end{itemize}
+
+\subsection{Reprodutibilidade e ética}
+\label{subsubsec:reprodutibilidade}
+
+\begin{itemize}
+    \item \emph{Pipelines} automatizados (Make/CLI), reprodutibilidade (semente fixa) e arquivo de dependências;
+    \item Anonimização/localização aproximada quando necessário; limites de uso dos dados.
+\end{itemize}
+
+
+
+% -------------------------
+% CRONOGRAMA
+% -------------------------
+\section{Cronograma de atividades}
+\label{subsec:cronograma}
+
+O Tabela~\ref{tab:cronograma} apresenta o planejamento em meses corridos, incluindo o \textit{gate} de decisão (Caminho A vs.\ B).
+
+\begin{table}[ht]
+    \centering
+    \caption{Cronograma das atividades do TCC.}
+    \label{tab:cronograma}
+    \begin{tabular}{c|c|c|c|c|c|c}
+        \hline Atividade & M1 & M2 & M3 & M4 & M5 & M6 \\
+        \hline Gate de decisão (A vs.\ B)                 & X & X &   &   &   &   \\
+        \hline Instalação/Calibração (se B)               &   & X & X &   &   &   \\
+        \hline Coleta IoT contínua (se B)                 &   &   & X & X & X & X \\
+        \hline Aquisição + pré-processamento SR (A e B)   &   & X & X & X &   &   \\
+        \hline Fusão (alinhamento + \textit{features})    &   &   & X & X &   &   \\
+        \hline Modelagem \textit{baseline}                &   &   &   & X & X &   \\
+        \hline Validação + ajustes                        &   &   &   &   & X & X \\
+        \hline Produtos + escrita do TCC                  &   &   &   &   & X & X \\
+        \hline
+    \end{tabular}
+    \legend{Fonte: Autoria Própria}
+\end{table}
+
+\noindent\textbf{Marcos (milestones).} M2: decisão tomada (A ou B) com plano fechado de dados; M4: \textit{dataset} de fusão pronto e primeiros mapas; M6: validação concluída e materiais do TCC consolidados.
+
+
+
+% ---
+% Capitulo de Resultados
+% ---
+\chapter{Resultados e Discussão}
+\label{cap_results}
+
+Apresentar os resultados obtidos no projeto desenvolvido e as discussões relevantes sobre estes resultados.
+
+% ---
+% Conclusão
+% ---
+\chapter{Conclusão}
+\label{cap_conclusao}
+
+Neste capítulo, apresentar a conclusão do trabalho e possíveis trabalhos futuros. Importante iniciar este capítulo apresentando uma síntese do que foi proposto no presente trabalho.
+
+
+% ---
+% Finaliza a parte no bookmark do PDF, para que se inicie o bookmark na raiz
+% ---
+\bookmarksetup{startatroot}% 
+% ---
+
+
+% ----------------------------------------------------------
+% ELEMENTOS PÓS-TEXTUAIS
+% ----------------------------------------------------------
+\postextual
+
+
+% ----------------------------------------------------------
+% Referências bibliográficas
+% ----------------------------------------------------------
+%\bibliographystyle{plain}
+
+\bibliography{refs}
+
+
+% ----------------------------------------------------------
+% Apêndices
+% ----------------------------------------------------------
+
+% ---
+% Inicia os apêndices
+% ---
+\begin{apendicesenv}
+
+% Imprime uma página indicando o início dos apêndices
+\partapendices
+
+% ----------------------------------------------------------
+\chapter{Título do Apêndice}
+% ----------------------------------------------------------
+
+\end{apendicesenv}
+% ---
+
+
+% ----------------------------------------------------------
+% Anexos
+% ----------------------------------------------------------
+
+% ---
+% Inicia os anexos
+% ---
+\begin{anexosenv}
+
+% Imprime uma página indicando o início dos anexos
+\partanexos
+
+% ---
+\chapter{Título do Anexo}
+% ---
+
+\end{anexosenv}
+
+\end{document}
