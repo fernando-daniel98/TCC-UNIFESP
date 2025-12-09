@@ -93,58 +93,58 @@
 % ============================================================================
 \section{Introdução}
 
-\begin{frame}{Contextualização}
+\begin{frame}{Contexto e motivação}
   \begin{itemize}
-    \item \textbf{Cenário global:}
+    \item \textbf{Pressão sobre os recursos hídricos:}
       \begin{itemize}
-        \item Crescente demanda por alimentos
-        \item Pressão sobre recursos hídricos
-        \item Necessidade de agricultura sustentável
+        \item Aumento da \textbf{demanda} global por alimentos
+        \item \textbf{Escassez} e \textbf{distribuição desigual} de água
+        \item \textbf{Impactos ambientais} da agricultura intensiva
       \end{itemize}
-    
-    \vspace{0.3cm}
-    
-    \item \textbf{Objetivos de Desenvolvimento Sustentável (ODS):}
+    \item \textbf{Desafio:} produzir mais com \textbf{menor desperdício de água} e \textbf{menor impacto ambiental}
+    \item \textbf{Alinhamento com a Agenda 2030 da ONU:}
       \begin{itemize}
-        \item \textbf{ODS 2:} Fome Zero e Agricultura Sustentável
-        \item \textbf{ODS 6:} Água Potável e Saneamento
-        \item \textbf{ODS 12:} Consumo e Produção Responsáveis
+        \item ODS 2 -- Fome Zero e Agricultura Sustentável
+        \item ODS 6 -- Água Potável e Saneamento
+        \item ODS 12 -- Consumo e Produção Responsáveis
       \end{itemize}
-    
-    \vspace{0.3cm}
-    
-    \item \textbf{Desafio:} Como usar a água de forma mais eficiente na agricultura?
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Motivação}
-  \begin{columns}
-    \column{0.5\textwidth}
-    \textbf{Problemas Identificados:}
-    \begin{itemize}
-      \item Escassez de água em diversas regiões
-      \item Desperdício na irrigação tradicional
-      \item Falta de informação em tempo real
-      \item Adoção fragmentada de tecnologias
-      \item Dificuldade de integração de dados
-    \end{itemize}
-    
-    \column{0.5\textwidth}
-    \textbf{Oportunidades Tecnológicas:}
-    \begin{itemize}
-      \item Internet das Coisas (IoT)
-      \item Sensoriamento remoto orbital
-      \item Machine Learning
-      \item Dados abertos (Sentinel, Landsat)
-      \item Agricultura de precisão 4.0
-    \end{itemize}
-  \end{columns}
-  
-  \vspace{0.5cm}
-  
-  \begin{alertblock}{Questão Central}
-    Como integrar dados de sensores em campo com imagens de satélite para otimizar o manejo da irrigação?
-  \end{alertblock}
+\begin{frame}{Desafios no manejo hídrico}
+  \begin{itemize}
+    \item Manejo da irrigação muitas vezes baseado em:
+      \begin{itemize}
+        \item \textbf{Experiência empírica} do produtor
+        \item \textbf{Informações dispersas} e \textbf{pouco integradas}
+      \end{itemize}
+    \item \textbf{Riscos associados:}
+      \begin{itemize}
+        \item Superirrigação $\Rightarrow$ \textbf{desperdício de água, energia e fertilizantes}
+        \item Subirrigação $\Rightarrow$ \textbf{estresse hídrico} e \textbf{perda de produtividade}
+      \end{itemize}
+    \item Necessidade de \textbf{ferramentas de apoio à decisão} com visão espaço--temporal do uso de água no talhão
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Tecnologias habilitadoras}
+  \begin{itemize}
+    \item \textbf{Internet das Coisas (IoT):}
+      \begin{itemize}
+        \item Sensores de \textbf{umidade do solo}, \textbf{temperatura/umidade do ar}, \textbf{vazão}, \textbf{pressão}, etc.
+        \item Medições de \textbf{alta frequência temporal} diretamente no campo
+      \end{itemize}
+    \item \textbf{Sensoriamento remoto:}
+      \begin{itemize}
+        \item \textbf{Imagens multiespectrais} (Sentinel-2, Landsat 8/9, HLS) e \textbf{SAR} (Sentinel-1)
+        \item \textbf{Visão} espacialmente \textbf{contínua} da área cultivada
+      \end{itemize}
+    \item \textbf{Aprendizado de máquina:}
+      \begin{itemize}
+        \item Modelos para \textbf{estimar indicadores de estado hídrico}
+        \item Geração de \textbf{mapas de recomendação de irrigação} em \textbf{nível de talhão}
+      \end{itemize}
+  \end{itemize}
 \end{frame}
 
 % ============================================================================
@@ -152,14 +152,50 @@
 % ============================================================================
 \section{Definição do Problema e Objetivos}
 
-\begin{frame}{Definição do Problema}
-  \begin{block}{Problema}
-    A gestão hídrica na agricultura ainda ocorre de forma fragmentada, sem aproveitar plenamente o potencial da integração entre:
-    \begin{itemize}
-      \item Medições de alta frequência temporal (sensores IoT)
-      \item Cobertura espacial ampla (imagens de satélite)
-      \item Técnicas de aprendizado de máquina
-    \end{itemize}
+\begin{frame}{Lacuna na literatura}
+  \begin{itemize}
+    \item Trabalhos em \textbf{IoT na agricultura}:
+      \begin{itemize}
+        \item Foco em arquiteturas de \textbf{monitoramento e automação} de irrigação
+        \item Ênfase em \textbf{sensores de campo} e lógica de decisão local
+      \end{itemize}
+    \item Trabalhos em \textbf{sensoriamento remoto e aprendizado de máquina}:
+      \begin{itemize}
+        \item Estimativa de \textbf{evapotranspiração}, \textbf{umidade do solo}, \textbf{uso de água} e \textbf{zonas de manejo}
+      \end{itemize}
+    \item Porém:
+      \begin{itemize}
+        \item Poucas propostas descrevem \textbf{arquiteturas completas} que integrem
+              \textbf{séries temporais de sensores IoT e produtos orbitais} em um fluxo operacional
+              para \textbf{apoio à decisão em irrigação}
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Definição do problema}
+  \begin{itemize}
+    \item Adoção de IoT e sensoriamento remoto ocorre, em geral, de forma \textbf{fragmentada}
+    \item \textbf{Ausência de metodologias} consolidadas de \textbf{fusão de dados} que conciliem:
+      \begin{itemize}
+        \item \textbf{Alta frequência temporal dos sensores de campo}
+        \item \textbf{Cobertura espacial e multiespectral} das imagens de satélite
+      \end{itemize}
+    
+    \begin{alertblock}{Questão Central}
+      \textbf{Como integrar, de forma sistemática, dados de sensores IoT e imagens de satélite}
+      para \textbf{apoiar decisões de irrigação em agricultura de precisão}, \textbf{reduzindo desperdício de
+      água} e \textbf{aumentando a eficiência produtiva}?
+    \end{alertblock}
+  \end{itemize}
+\end{frame}
+
+% PAREI AQUIIII
+
+\begin{frame}{Objetivo geral}
+  \begin{block}{Objetivo geral}
+    Propor e desenvolver um sistema de agricultura de precisão focado no manejo hídrico
+    sustentável, baseado na fusão de dados de sensores IoT e imagens de satélite, com o
+    propósito de gerar mapas de recomendação de irrigação mais precisos e eficientes.
   \end{block}
   
   \vspace{0.3cm}
