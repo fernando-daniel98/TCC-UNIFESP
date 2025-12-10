@@ -134,7 +134,7 @@
         \item Sensores de \textbf{umidade do solo}, \textbf{temperatura/umidade do ar}, \textbf{vazão}, \textbf{pressão}, etc.
         \item Medições de \textbf{alta frequência temporal} diretamente no campo
       \end{itemize}
-    \item \textbf{Sensoriamento remoto:}
+    \item \textbf{Sensoriamento remoto (SR):}
       \begin{itemize}
         \item \textbf{Imagens multiespectrais} (Sentinel-2, Landsat 8/9, HLS) e \textbf{SAR} (Sentinel-1)
         \item \textbf{Visão} espacialmente \textbf{contínua} da área cultivada
@@ -189,73 +189,87 @@
   \end{itemize}
 \end{frame}
 
-% PAREI AQUIIII
-
 \begin{frame}{Objetivo geral}
   \begin{block}{Objetivo geral}
-    Propor e desenvolver um sistema de agricultura de precisão focado no manejo hídrico
-    sustentável, baseado na fusão de dados de sensores IoT e imagens de satélite, com o
-    propósito de gerar mapas de recomendação de irrigação mais precisos e eficientes.
+    \textbf{Propor e desenvolver} um \textbf{sistema de agricultura de precisão} focado no \textbf{manejo hídrico
+    sustentável}, baseado na \textbf{fusão de dados de sensores IoT e imagens de satélite}, com o
+    propósito de gerar \textbf{mapas de recomendação de irrigação} mais precisos e eficientes.
   \end{block}
   
-  \vspace{0.3cm}
+%   \vspace{0.4cm}
   
-  \textbf{Consequências:}
-  \begin{itemize}
-    \item Desperdício de água
-    \item Irrigação inadequada (excesso ou déficit)
-    \item Redução de produtividade
-    \item Impactos ambientais negativos
-    \item Custos operacionais elevados
-  \end{itemize}
+%   \begin{itemize}
+%     \item Integração de duas fontes principais de informação:
+%       \begin{itemize}
+%         \item Medições de redes de sensores IoT em campo
+%         \item Dados de sensoriamento remoto orbitais
+%       \end{itemize}
+%     \item Geração de produtos operacionais em nível de talhão
+%   \end{itemize}
+\end{frame}
+
+\begin{frame}{Objetivos específicos (1/2)}
+  \begin{enumerate}
+    \item \textbf{Revisar a literatura} e o estado da arte sobre:
+      \begin{itemize}
+        \item Tecnologias de \textbf{IoT aplicadas à agricultura}
+        \item \textbf{Sensoriamento remoto voltado ao manejo hídrico}
+        \item Técnicas de \textbf{fusão de dados e aprendizado de máquina} em \textbf{agricultura de precisão}
+      \end{itemize}
+    \item \textbf{Definir a arquitetura do sistema}, especificando:
+      \begin{itemize}
+        \item Componentes de \textbf{\emph{hardware} para coleta de dados}
+        \item Plataforma de \textbf{\emph{software} para ingestão e armazenamento}
+      \end{itemize}
+    \item \textbf{Estabelecer a metodologia para aquisição e processamento de imagens orbitais}
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Objetivos específicos (2/2)}
+  \begin{enumerate}
+    \setcounter{enumi}{3}
+    \item \textbf{Desenvolver um modelo de \emph{machine learning}} para realizar a fusão dos dados,
+          \textbf{correlacionando medições pontuais} e de alta frequência (IoT) \textbf{com dados espaciais} e
+          de menor frequência (satélite)
+    \item Implementar um \textbf{protótipo de sistema} que utilize o modelo de fusão para gerar:
+      \begin{itemize}
+        \item \textbf{Mapas}
+        \item \textbf{Relatórios de irrigação}
+        \item \textbf{Dashboards de recomendação e alerta sobre a irrigação}
+      \end{itemize}
+    \item \textbf{Analisar a eficácia} potencial do sistema na \textbf{redução do desperdício de água} e no
+          \textbf{aumento da eficiência produtiva}
+  \end{enumerate}
 \end{frame}
 
 \begin{frame}{Solução Proposta}
   \begin{center}
     \begin{tikzpicture}[
-      node distance=1.5cm,
-      box/.style={rectangle, draw, rounded corners, minimum width=3cm, minimum height=1cm, align=center, font=\small},
+      node distance=1.0cm,
+      box/.style={rectangle, draw, rounded corners, minimum width=1.6cm, minimum height=0.85cm, align=center, font=\scriptsize},
       arrow/.style={-Stealth, thick}
     ]
-      % Nível 1: Fontes
-      \node[box, fill=blue!20] (iot) {Sensores IoT \\ \tiny (Alta freq. temporal)};
-      \node[box, fill=green!20, right=of iot] (sat) {Satélite \\ \tiny (Cobertura espacial)};
+      % Linha superior: Fontes → ETL → Fusão
+      \node[box, fill=blue!20] (iot) {Sensores IoT \\ \tiny (Alta freq.)};
+      \node[box, fill=green!20, above=0.5cm of iot] (sat) {Satélites \\ \tiny (Cobertura esp.)};
       
-      % Nível 2: Fusão
-      \node[box, below=1.5cm of iot, xshift=2.25cm, fill=yellow!20] (fusion) {Fusão de Dados \\ \tiny (Feature-level)};
+      \node[box, right=1.2cm of iot, yshift=0.25cm, fill=cyan!20] (etl) {ETL \\ \tiny (Limpeza/Transform.)};
       
-      % Nível 3: ML
-      \node[box, below=1.5cm of fusion, fill=orange!20] (ml) {Machine Learning \\ \tiny (Regressão/Classificação)};
+      \node[box, right=1.2cm of etl, fill=yellow!20] (fusion) {Fusão \\ \tiny (Feature-level)};
       
-      % Nível 4: Produto
-      \node[box, below=1.5cm of ml, fill=red!20] (output) {Mapa de Recomendação \\ de Irrigação};
+      % Linha inferior: ML → Produtos
+      \node[box, below=1.0cm of fusion, xshift=0.6cm, fill=orange!20] (ml) {ML \\ \tiny (Regressão/Classif.)};
+      
+      \node[box, right=1.2cm of ml, fill=red!20] (output) {Produtos \\ \tiny (Mapas/Dashboards)};
       
       % Setas
-      \draw[arrow] (iot) -- (fusion);
-      \draw[arrow] (sat) -- (fusion);
+      \draw[arrow] (iot) -- (etl);
+      \draw[arrow] (sat) -- (etl);
+      \draw[arrow] (etl) -- (fusion);
       \draw[arrow] (fusion) -- (ml);
       \draw[arrow] (ml) -- (output);
     \end{tikzpicture}
   \end{center}
-\end{frame}
-
-\begin{frame}{Objetivos}
-  \begin{block}{Objetivo Geral}
-    Desenvolver um sistema de agricultura de precisão para o manejo hídrico sustentável, baseado na fusão de dados de sensores IoT e imagens de satélite.
-  \end{block}
-  
-  \vspace{0.3cm}
-  
-  \begin{block}{Objetivos Específicos}
-    \begin{enumerate}
-      \item Revisar literatura sobre IoT, sensoriamento remoto e fusão de dados
-      \item Definir arquitetura do sistema (hardware e software)
-      \item Estabelecer metodologia de aquisição e processamento
-      \item Desenvolver modelo de ML para fusão e predição
-      \item Implementar protótipo com dashboard de recomendação
-      \item Analisar eficácia na redução do desperdício de água
-    \end{enumerate}
-  \end{block}
 \end{frame}
 
 % ============================================================================
