@@ -481,69 +481,39 @@
 % ============================================================================
 \section{Resultados}
 
-\begin{frame}{Status Atual do Projeto}
-  \begin{table}
-    \centering
-    \begin{tabular}{lc}
-      \toprule
-      \textbf{Atividade} & \textbf{Status} \\
-      \midrule
-      Revisão bibliográfica & \textcolor{green!70!black}{Concluída} \\
-      Definição de arquitetura & \textcolor{green!70!black}{Concluída} \\
-      Organização do repositório & \textcolor{green!70!black}{Concluída} \\
-      Aquisição de dados (A ou B) & \textcolor{orange}{Em decisão} \\
-      Pré-processamento de dados & \textcolor{red}{Não iniciada} \\
-      Fusão de dados & \textcolor{red}{Não iniciada} \\
-      Modelagem & \textcolor{red}{Não iniciada} \\
-      Dashboard & \textcolor{red}{Não iniciada} \\
-      Validação & \textcolor{red}{Não iniciada} \\
-      Escrita da monografia & \textcolor{orange}{Em andamento} \\
-      \bottomrule
-    \end{tabular}
-  \end{table}
-\end{frame}
-
-\begin{frame}{Resultados Esperados}
-  \begin{enumerate}
-    \item \textbf{Metodologia de Fusão}
-      \begin{itemize}
-        \item Pipeline reproduzível e documentado
-        \item Integração efetiva de IoT + Satélite
-      \end{itemize}
-    
-    \item \textbf{Modelo Preditivo}
-      \begin{itemize}
-        \item Estimativa de umidade do solo (R² > 0.8)
-        \item Classificação de necessidade de irrigação (F1 > 0.75)
-      \end{itemize}
-    
-    \item \textbf{Produtos Operacionais}
-      \begin{itemize}
-        \item Mapas de recomendação de irrigação
-        \item Dashboard de apoio à decisão
-        \item Relatórios de economia de água
-      \end{itemize}
-    
-    \item \textbf{Impacto}
-      \begin{itemize}
-        \item Redução estimada de 20-30\% no uso de água
-        \item Melhoria na uniformidade da irrigação
-        \item Contribuição para ODS 2, 6 e 12
-      \end{itemize}
-  \end{enumerate}
-\end{frame}
-
-\begin{frame}{Exemplo de Produto Final}
-  \begin{center}
-    \includegraphics[width=0.7\textwidth]{figures/example_irrigation_map.png}
-    \\[3mm]
-    {\small Exemplo conceitual de mapa de recomendação de irrigação}
-  \end{center}
-  
+\begin{frame}{Situação atual do projeto}
   \begin{itemize}
-    \item \textcolor{blue}{Azul}: Não irrigar (umidade adequada)
-    \item \textcolor{yellow}{Amarelo}: Irrigação moderada
-    \item \textcolor{red}{Vermelho}: Irrigação intensa (déficit hídrico)
+    \item Capítulos de \textbf{Introdução}, \textbf{Fundamentação Teórica} e \textbf{Desenvolvimento} já estruturados
+    \item Etapas concluídas/adiantadas:
+      \begin{itemize}
+        \item \textbf{Revisão bibliográfica} (IoT, SR, fusão de dados, ML)
+        \item \textbf{Definição de objetivos} e \textbf{arquitetura em camadas}
+        \item \textbf{Planejamento dos caminhos} A e B
+        \item \textbf{Estruturação do ambiente} de dados e da organização de pastas
+      \end{itemize}
+    \item Principais aprendizados:
+      \begin{itemize}
+        \item \textbf{Desafios de integração} de fontes \textbf{heterogêneas}
+        \item \textbf{Gestão e versionamento} de grandes volumes de dados
+        \item \textbf{Modelagem de aprendizado de máquina} com \textbf{dados espaço--temporais}
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Resultados esperados e métricas}
+  \begin{itemize}
+    \item \textbf{Resultados esperados:}
+      \begin{itemize}
+        \item \textbf{\emph{Dataset} integrado} IoT + satélite em nível de talhão
+        \item \textbf{Mapas de recomendação de irrigação} por período/safra
+        \item \textbf{Protótipo de interface visual} com mapas, séries temporais e alertas
+      \end{itemize}
+    \item \textbf{Métricas de avaliação:}
+      \begin{itemize}
+        \item \textbf{RMSE/MAE} para variáveis contínuas (umidade, ET, etc.)
+        \item \textbf{F1/IoU} para classes de água/estresse, quando aplicável
+        \item \textbf{Indicadores de \emph{gain} operacional} (economia potencial de água)
+      \end{itemize}
   \end{itemize}
 \end{frame}
 
@@ -552,116 +522,87 @@
 % ============================================================================
 \section{Conclusões e Trabalhos Futuros}
 
-\begin{frame}{Conclusões Parciais}
+\begin{frame}{Contribuições do trabalho}
   \begin{itemize}
-    \item \textbf{Revisão bibliográfica} confirma:
+    \item Organização de \textbf{boas práticas de projeto de dados} para fusão IoT--satélite
+    \item Proposição de \textbf{arquitetura em camadas} para manejo hídrico sustentável:
       \begin{itemize}
-        \item Viabilidade técnica da fusão IoT + Satélite
-        \item Lacuna na integração operacional dessas fontes
-        \item Potencial de ML para agricultura de precisão
+        \item \textbf{Aquisição}, \textbf{transmissão}, \textbf{armazenamento} e \textbf{tratamento} de dados
       \end{itemize}
-    
-    \vspace{0.3cm}
-    
-    \item \textbf{Arquitetura proposta} é:
+    \item Documentação de \textbf{metodologia de fusão IoT--sensoriamento remoto}
+    \item Base estruturada para desenvolvimentos futuros em:
       \begin{itemize}
-        \item Modular e escalável
-        \item Baseada em tecnologias abertas
-        \item Adaptável a diferentes cenários (Caminhos A e B)
-      \end{itemize}
-    
-    \vspace{0.3cm}
-    
-    \item \textbf{Metodologia} está:
-      \begin{itemize}
-        \item Bem fundamentada teoricamente
-        \item Alinhada com boas práticas de ciência de dados
-        \item Pronta para implementação
+        \item \textbf{Irrigação inteligente}
+        \item \textbf{Agricultura de precisão sustentável}
       \end{itemize}
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Trabalhos Futuros}
-  \begin{columns}
-    \column{0.5\textwidth}
-    \textbf{Curto Prazo (TCC):}
-    \begin{enumerate}
-      \item Decisão sobre fonte de dados
-      \item Implementação do pipeline
-      \item Treinamento de modelos
-      \item Desenvolvimento do dashboard
-      \item Validação dos resultados
-      \item Finalização da monografia
-    \end{enumerate}
-    
-    \column{0.5\textwidth}
-    \textbf{Longo Prazo:}
-    \begin{enumerate}
-      \item Expansão para outras culturas
-      \item Modelos de previsão (LSTM)
-      \item Integração com sistemas de automação
-      \item App mobile para agricultores
-      \item Análise de custo-benefício
-      \item Estudo de caso em propriedades reais
-      \item Publicação científica
-    \end{enumerate}
-  \end{columns}
+\begin{frame}{Limitações e desafios}
+  \begin{itemize}
+    \item Dependência da \textbf{qualidade e disponibilidade dos dados}:
+      \begin{itemize}
+        \item Cobertura de nuvens em imagens orbitais
+        \item \textbf{Falhas de sensores} ou de \textbf{comunicação}
+      \end{itemize}
+    \item Questões de \textbf{escalabilidade}:
+      \begin{itemize}
+        \item \textbf{Generalização para diferentes culturas e regiões}
+      \end{itemize}
+    \item Complexidade de operação:
+      \begin{itemize}
+        \item Necessidade de \textbf{conhecimentos em geoprocessamento}, \textbf{programação} e \textbf{ciência e análise de dados}
+      \end{itemize}
+  \end{itemize}
 \end{frame}
 
-\begin{frame}{Contribuições Esperadas}
-  \begin{block}{Contribuições Técnicas}
-    \begin{itemize}
-      \item Metodologia de fusão IoT-Satélite documentada
-      \item Código e arquitetura open-source
-      \item Pipeline reproduzível de dados
-    \end{itemize}
-  \end{block}
-  
-  \begin{block}{Contribuições Científicas}
-    \begin{itemize}
-      \item Validação de abordagem integradora
-      \item Quantificação de benefícios da fusão
-      \item Base para estudos futuros
-    \end{itemize}
-  \end{block}
-  
-  \begin{block}{Contribuições Socioambientais}
-    \begin{itemize}
-      \item Redução do desperdício de água
-      \item Apoio à agricultura sustentável
-      \item Alinhamento com ODS da ONU
-    \end{itemize}
-  \end{block}
+\begin{frame}{Trabalhos futuros}
+  \begin{itemize}
+    \item \textbf{Implantar e avaliar a rede IoT em área piloto (Caminho B)}
+    \item \textbf{Explorar diferentes modelos} de \emph{machine learning} e comparar desempenho
+    \item Incorporar \textbf{novas fontes de dados}:
+      \begin{itemize}
+        \item \textbf{Sensores adicionais} (tensiômetros, estações meteorológicas completas)
+        \item \textbf{Séries temporais mais longas} de satélite e dados climáticos
+      \end{itemize}
+    \item \textbf{Evoluir a interface} para um \textbf{dashboard operacional} utilizável por técnicos e produtores
+    \item \textbf{Realizar validação operacional} em parceria com produtores e instituições
+  \end{itemize}
+\end{frame}
+
+% ============================================================================
+% REFERÊNCIAS
+% ============================================================================
+\begin{frame}{Referências}
+  \begin{thebibliography}{99}
+    \bibitem{1} Bhadra, M. (2024). Agriculture and Farming Dataset. Kaggle. 
+    \url{www.kaggle.com/datasets/bhadramohit/agriculture-and-farming-dataset}
+    
+    \bibitem{2} Kaggle Community. (2023). Agricultural Datasets Discussion. Kaggle Discussions.
+    \url{www.kaggle.com/discussions/general/446746}
+    
+    \bibitem{3} DatasetEngineer. (2024). Smart Farming Data 2024 (SF24). Kaggle.
+    \url{www.kaggle.com/datasets/datasetengineer/smart-farming-data-2024-sf24}
+
+    \bibitem{4} The IDB-Project. (2011). A database for remote sensing indices.
+    \url{www.indexdatabase.de/db/i.php}
+  \end{thebibliography}
 \end{frame}
 
 % ============================================================================
 % SLIDE FINAL
 % ============================================================================
-\begin{frame}[plain]
+\begin{frame}{Agradecimentos e contato}
   \begin{center}
-    {\Huge Obrigado!}
-    
-    \vspace{1cm}
-    
-    {\Large Dúvidas e Sugestões?}
-    
-    \vspace{1.5cm}
-    
-    \begin{columns}
-      \column{0.5\textwidth}
-      \begin{center}
-        \textbf{Fernando Daniel Marcelino} \\[2mm]
-        \href{mailto:fernando.marcelino@unifesp.br}{fernando.marcelino@unifesp.br} \\[5mm]
-        \includegraphics[width=0.3\textwidth]{figures/logo-unifesp.pdf}
-      \end{center}
-      
-      \column{0.5\textwidth}
-      \begin{center}
-        \textbf{Repositório do Projeto:} \\[2mm]
-        \href{https://github.com/fernando-daniel98/TCC-UNIFESP}{github.com/fernando-daniel98/TCC-UNIFESP} \\[5mm]
-        {\small Código, dados e documentação disponíveis}
-      \end{center}
-    \end{columns}
+    \Large Obrigado pela atenção! \\[5mm]
+    \normalsize
+    \textbf{Fernando Daniel Marcelino} \\[2mm]
+    \href{mailto:fernando.marcelino@unifesp.br}{fernando.marcelino@unifesp.br} \\[3mm]
+    \vspace{0.4cm}
+    \includegraphics[width=0.25\textwidth]{figures/logo-unifesp.pdf} \\[3mm]
+    \small
+    Repositório do projeto: \\
+    \href{https://github.com/fernando-daniel98/TCC-UNIFESP}{github.com/fernando-daniel98/TCC-UNIFESP}
   \end{center}
 \end{frame}
 
