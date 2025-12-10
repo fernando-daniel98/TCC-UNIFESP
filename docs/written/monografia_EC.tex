@@ -16,7 +16,8 @@
 \usepackage{times}
 \usepackage[T1]{fontenc}			% Selecao de codigos de fonte.
 \usepackage[utf8]{inputenc}		% Codificacao do documento (conversão automática dos acentos)
-\usepackage{lastpage}			% Usado pela Ficha catalográfica
+\usepackage{hyperref}			% Deve vir antes de lastpage
+% \usepackage{lastpage}			% Usado pela Ficha catalográfica
 %\usepackage{natbib}
 \usepackage{indentfirst}			% Indenta o primeiro parágrafo de cada seção.
 \usepackage{color}				% Controle das cores
@@ -28,6 +29,9 @@
 % ---
 \usepackage[brazilian,hyperpageref]{backref}	 % Paginas com as citações na bibl
 \usepackage[alf]{abntex2cite}	% Citações padrão ABNT
+
+% Define comando htmladdnormallink para compatibilidade com bibliografia
+\providecommand{\htmladdnormallink}[2]{\href{#2}{#1}}
 
 % --- 
 % CONFIGURAÇÕES DE PACOTES
@@ -94,7 +98,6 @@
 		urlcolor=blue,
 		bookmarksdepth=4
 }
-
 \makeatother
 % --- 
 % --- 
@@ -756,7 +759,7 @@ do manejo hídrico:
 % Capitulo de Desenvolvimento
 % ---
 \chapter{Desenvolvimento}
-\label{sec:desenvolvimento}
+\label{cap_desenv}
 
 Esta seção descreve os materiais e os métodos a serem empregados no estudo, considerando dois caminhos complementares de obtenção de dados: (A) uso de \textit{datasets} existentes e (B) coleta em campo com rede própria baseada em LoRaWAN. Ao final, apresenta-se o cronograma das atividades planejadas.
 
@@ -976,6 +979,7 @@ Neste capítulo, apresentar a conclusão do trabalho e possíveis trabalhos futu
 % Referências bibliográficas
 % ----------------------------------------------------------
 %\bibliographystyle{plain}
+\bibliographystyle{abntex2-alf}
 
 \bibliography{refs}
 
