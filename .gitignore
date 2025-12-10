@@ -480,6 +480,8 @@ $RECYCLE.BIN/
 # ============================================================================
 docs/presentations/**/build/
 docs/presentations/**/*.pdf
+!docs/written/monografia_EC.pdf
+!docs/presentations/semninarios/seminario_dezembro_2025.pdf
 
 # ============================================================================
 # Arquivos temporários e logs
